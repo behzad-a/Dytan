@@ -1,0 +1,27 @@
+<dytan-config>
+    <sources>
+        <source type="path">
+            <!-- <file>sample/wc/a.txt</file>
+            <file>sample/wc/b.txt</file>
+	    <file>conf</file>
+            <granularity>PerByte</granularity> -->
+            <file>conf</file>
+            <granularity>PerOffset</granularity>
+        </source>
+        <taint-marks>4096</taint-marks>
+    </sources>
+    <propagation>
+        <dataflow>true</dataflow>
+        <controlflow>false</controlflow>
+    </propagation>
+    <sinks>
+        <sink>
+            <id>36</id>
+            <location type="instruction">
+                <instruction>ret</instruction>
+                <instruction>jmp</instruction>
+            </location>
+            <action>validate-absence</action>
+        </sink>
+    </sinks>
+</dytan-config>

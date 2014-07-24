@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Dytan Manual</TITLE>
+<META NAME="description" CONTENT="Dytan Manual">
+<META NAME="keywords" CONTENT="dytan-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="dytan-manual.css">
+
+</HEAD>
+
+<BODY >
+<H1 ALIGN="CENTER">Dytan Manual</H1>
+<DIV CLASS="author_info">
+
+</DIV>
+
+<P>
+<BR>
+
+<H2><A NAME="SECTION00010000000000000000">
+Contents</A>
+</H2>
+<!--Table of Contents-->
+
+<UL CLASS="TofC">
+<LI><A NAME="tex2html11"
+  HREF="dytan-manual.html#SECTION00020000000000000000">Prerequisites</A>
+<LI><A NAME="tex2html12"
+  HREF="dytan-manual.html#SECTION00030000000000000000">Dytan's features and configuration</A>
+<UL>
+<LI><A NAME="tex2html13"
+  HREF="dytan-manual.html#SECTION00031000000000000000">Dytan's configuration</A>
+<LI><A NAME="tex2html14"
+  HREF="dytan-manual.html#SECTION00032000000000000000">How to taint specific arguments of a function</A>
+<LI><A NAME="tex2html15"
+  HREF="dytan-manual.html#SECTION00033000000000000000">How to taint data originating from a file or from a network connection</A>
+<LI><A NAME="tex2html16"
+  HREF="dytan-manual.html#SECTION00034000000000000000">How to taint arbitrary memory ranges (from within a program)</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html17"
+  HREF="dytan-manual.html#SECTION00040000000000000000">Running Dytan</A>
+<LI><A NAME="tex2html18"
+  HREF="dytan-manual.html#SECTION00050000000000000000">Internals</A>
+</UL>
+<!--End of Table of Contents-->
+<P>
+
+<H3>Abstract:</H3>
+<DIV CLASS="ABSTRACT">
+Dytan is a dynamic taint analysis framework that allows users to
+implement different kinds of dynamic taint analyses. This file
+discusses the features of Dytan that can be accessed through the
+high-level XML interface. The use of Dytan's core without leveraging
+the interface is described in file internals.txt
+</DIV>
+<P>
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+Prerequisites</A>
+</H1>
+
+<P>
+Dytan is based on PIN version 2.2-13635-gcc.4.0.0-ia32-linux. To
+download and install the right version of PIN, users should execute
+script <code>setup-pin.sh</code>, which is provided with the distribution.
+Because of recent changes in the Linux kernel, this version of PIN
+does not work correctly on the most recent Linux distributions. We use
+Linux kernel version 2.6.15. More precisely, we recommend users to
+install Dytan on a machine running Ubuntu 6.06, which is the platform
+on which it was tested.
+
+<P>
+To be able to compile Dytan, it is necessary to install the libxml2
+development library (package libxml2-dev for Debian/Ubuntu users).
+
+<P>
+Control-flow based taint propagation leverages postdominance
+information computed by one of Dytan's modules. In the presence of
+indirect jumps in the code, postdominance information is not computed
+and a special basic block is added in the position where the jump is.
+To alleviate this issue, it is recommended to pre-process the source
+code of the programs under analysis using CIL, whenever possible. CIL
+eliminates some of the constructs that cause indirect jumps in the
+code, such as<code>switch</code> statements.
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+Dytan's features and configuration</A>
+</H1>
+
+<P>
+The current implementation of Dytan's interface is incomplete. As of
+now, Dytan allows users to:
+
+<P>
+
+<UL>
+<LI>Taint specific arguments of a function.
+</LI>
+<LI>Taint arbitrary memory ranges (from within a program).
+</LI>
+<LI>Taint data originating from a file
+</LI>
+<LI>Taint data originating from a network connection
+</LI>
+</UL>
+Dytan's interface does not support yet function return values.
+
+<P>
+
+<H2><A NAME="SECTION00031000000000000000">
+Dytan's configuration</A>
+</H2>
+
+<P>
+Before running it, Dytan must be configured by modifying the
+configuration file config.xml. The configuration file contains
+information about sources, propagation policies, and sinks. They allow to define whether propagation
+should occur only through data dependences or through both data and
+control dependences. (Note that our current implementation accounts
+only for direct control dependences, that is, dependences due to the
+fact that something is not executed are not considered.) In addition 
+to the propagation policies, the taint source can be seleted to be
+a single file or multiple files by populating the <code>&lt;file&gt;</code> tags. Dytan
+can be configured to use any number of taint marks by filling the
+<code>&lt;taint-marks&gt;</code> tag in the configuration file. For tainting data
+coming from the filesystem or the network, Dytan can be configured
+to taint an entire 'read' at a time or taint the individual bytes
+in the read separately by specifiying the <code>&lt;granularity&gt;</code> tag in
+the configuration file. The <code>&lt;granularity&gt;</code> tag takes two possible
+values <code>PerRead</code> or <code>PerByte</code>. Sample configuration files are provided
+in the root folder of Dytan as well as in the example folders.
+
+<P>
+To taint data from a network connection, the configuration file needs
+to have the tags in the following manner under the <code>&lt;sources&gt;</code> tag.
+<PRE>
+&lt;source type="network"&gt;
+    &lt;host&gt;127.0.0.1&lt;/host&gt;
+    &lt;port&gt;80&lt;/port&gt;
+    &lt;granularity&gt;PerRead&lt;/granularity&gt;
+&lt;/source&gt;
+</PRE>
+
+<P>
+Similarly, for tainting a file, the config file will look like:
+<PRE>
+&lt;source type="path"&gt;
+    &lt;file&gt;sample/wc/a.txt&lt;/file&gt;
+    &lt;granularity&gt;PerByte&lt;/granularity&gt;
+&lt;/source&gt;
+</PRE>
+
+<P>
+There can be multiple <code>&lt;source&gt;</code> entries in the configuration file.
+It should be noted that the file path specified should be exactly
+what the program internally uses.
+
+<P>
+
+<H2><A NAME="SECTION00032000000000000000">
+How to taint specific arguments of a function</A>
+</H2>
+
+<P>
+To taint function arguments, users must modify the functions in file
+<code>taint_func_args.cpp</code>. After modifying the file, Dytan must be
+recompiled by invoking <code>make</code> in the root directory of the
+distribution.  As an example, the version of the file in the
+distribution contains code to taint arguments to the <code>main</code> function.
+Please refer to that file for a better understanding of the next
+paragraph, which describes how to modify file <code>taint_func_args.cpp</code>.
+
+<P>
+The string array <code>taint_function</code> should contain the names of the
+routines whose parameters are to be tainted. In function
+<code>taint_routines(RTN, void *)</code>, there should be an if block for each of
+the functions in the <code>taint_function</code> array. Each of these blocks
+should use PIN API to insert a call to a suitably defined wrapper
+before the original function is executed. This is accomplished by
+using PIN API function <code>RTN_InsertCall</code>. This function takes the
+following arguments:
+
+<P>
+<PRE>
+- RTN rtn: the original function.
+- IPOINT_BEFORE: tells PIN to insert the call before rtn's entry.
+- AFUNPTR(&lt;wrapper name&gt;): specifies the wrapper function's name.
+- Assuming that rtn has n arguments:
+   - IARG_FUNCARG_ENTRYPOINT_REFERENCE, 0,
+   - IARG_FUNCARG_ENTRYPOINT_REFERENCE, 1,
+   - ...
+   - IARG_FUNCARG_ENTRYPOINT_REFERENCE, n,
+- IARG_END: tells RTN_InsertCall that there are no more parameters.
+</PRE>
+
+<P>
+The wrapper function is the place where the tainting actually occurs.
+It takes n arguments of type <code>ADDRINT *</code>, where n is the number of
+arguments of the original function. For each parameter to be tainted,
+the wrapper calls Dytan's memory tainting function, which takes three
+parameters: the starting address of the parameter's memory location,
+the size of the parameter in bytes, and the numeric value of the taint
+mark to be associated with the parameter.  See function
+<code>main_wrapper_func</code> in file <code>taint_func_args.cpp</code> for an example of a
+wrapper.
+
+<P>
+
+<H2><A NAME="SECTION00033000000000000000">
+How to taint data originating from a file or from a network connection</A>
+</H2>
+
+<P>
+Dytan can taint data being read from a file or from a network socket.
+The file or the network connection needs to be specified in the
+configuration file in the <code>sources</code> section as explained in the Configuration
+section. The example folders in the Dytan distribution contain sample 
+configuration files and code. At the end of execution of a program,
+the taint markings will be dumped in "taint-log.log".
+
+<P>
+
+<H2><A NAME="SECTION00034000000000000000">
+How to taint arbitrary memory ranges (from within a program)</A>
+</H2>
+
+<P>
+To taint arbitrary memory ranges from within your program, make a call
+to function
+<PRE>
+  DYTAN_tag(ADDRINT start_address, size_t size, char * name)
+</PRE>
+where size is the size of the memory to be tainted and name is the
+string to be associated with this taint mark.
+
+<P>
+Analogously, to display taint marks at a particular memory location
+from within your program, make a call to function
+<PRE>
+  DYTAN_display(ADDRINT start_address, size_t size, char *fmt)
+</PRE>
+where fmt is the format in which the taint marks should be displayed.
+
+<P>
+The sample program provided with this distribution, available in
+directory <code>sample/wc</code>, makes the above calls for tainting memory and
+displaying memory taint marks.  See file internals.txt for
+instructions on how to compile the sample program.
+
+<P>
+
+<H1><A NAME="SECTION00040000000000000000">
+Running Dytan</A>
+</H1>
+
+<P>
+After configuring and recompiling Dytan, it can be run by executing:
+<PRE>
+./run-dytan &lt;program_name&gt;
+</PRE>
+
+<P>
+For example, to run Dytan on the provided example, go to the root
+directory of the distribution and run
+<PRE>
+./run-dytan sample/wc/wc sample/wc/a.txt
+</PRE>
+
+<P>
+
+<H1><A NAME="SECTION00050000000000000000">
+Internals</A>
+</H1>
+
+<P>
+See internals.txt for details on the internals of Dytan.
+
+<P>
+
+<H1><A NAME="SECTION00060000000000000000">
+About this document ...</A>
+</H1>
+ <STRONG>Dytan Manual</STRONG><P>
+This document was generated using the
+<A HREF="http://www.latex2html.org/"><STRONG>LaTeX</STRONG>2<tt>HTML</tt></A> translator Version 2002-2-1 (1.71)
+<P>
+Copyright &#169; 1993, 1994, 1995, 1996,
+Nikos Drakos, 
+Computer Based Learning Unit, University of Leeds.
+<BR>
+Copyright &#169; 1997, 1998, 1999,
+<A HREF="http://www.maths.mq.edu.au/~ross/">Ross Moore</A>, 
+Mathematics Department, Macquarie University, Sydney.
+<P>
+The command line arguments were: <BR>
+ <STRONG>latex2html</STRONG> <TT>-split 0 -no_navigation -no_subdir dytan-manual.tex</TT>
+<P>
+The translation was initiated by kunal on 2008-04-19
+<BR><HR>
+<ADDRESS>
+kunal
+2008-04-19
+</ADDRESS>
+</BODY>
+</HTML>

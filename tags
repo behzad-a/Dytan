@@ -1,0 +1,500 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AF_MASK	./instrument_functions.c	42;"	d	file:
+APP_UNDEF_USE_GNU	./divide_by_zero_linux.c	41;"	d	file:
+APP_UNDEF_USE_GNU	./divide_by_zero_linux.c	49;"	d	file:
+AfterForkInChild	./fork_jit_tool.cpp	/^VOID AfterForkInChild(THREADID threadid, const CONTEXT* ctxt, VOID * arg)$/;"	f
+AfterForkInParent	./fork_jit_tool.cpp	/^VOID AfterForkInParent(THREADID threadid, const CONTEXT* ctxt, VOID * arg)$/;"	f
+AssignTagToByteRange	./replace_functions.cpp	/^void AssignTagToByteRange(ADDRINT start, size_t size, char * name)$/;"	f
+BITSET_BITS	./bitset.cpp	50;"	d	file:
+BITSET_MASK	./bitset.cpp	53;"	d	file:
+BITSET_USED	./bitset.cpp	59;"	d	file:
+BITSET_WORD	./bitset.cpp	56;"	d	file:
+BadConversion	./include/dytan.h	/^        BadConversion(const std::string& s)$/;"	f	class:BadConversion
+BadConversion	./include/dytan.h	/^class BadConversion : public std::runtime_error {$/;"	c
+BeforeFork	./fork_jit_tool.cpp	/^VOID BeforeFork(THREADID threadid, const CONTEXT* ctxt, VOID * arg)$/;"	f
+BufferFull	./buffer_linux.cpp	/^VOID * BufferFull(BUFFER_ID id, THREADID tid, const CONTEXT *ctxt, VOID *buf,$/;"	f
+BufferFull	./buffer_windows.cpp	/^VOID * BufferFull(BUFFER_ID id, THREADID tid, const CONTEXT *ctxt, VOID *buf,$/;"	f
+CF_MASK	./instrument_functions.c	40;"	d	file:
+CONFIGFILE	./config_parser.cpp	169;"	d	file:
+CheckCMOVB	./instrument_functions.c	/^ADDRINT CheckCMOVB(ADDRINT eflags)$/;"	f
+CheckCMOVBE	./instrument_functions.c	/^ADDRINT CheckCMOVBE(ADDRINT eflags)$/;"	f
+CheckCMOVL	./instrument_functions.c	/^ADDRINT CheckCMOVL(ADDRINT eflags)$/;"	f
+CheckCMOVLE	./instrument_functions.c	/^ADDRINT CheckCMOVLE(ADDRINT eflags)$/;"	f
+CheckCMOVNB	./instrument_functions.c	/^ADDRINT CheckCMOVNB(ADDRINT eflags)$/;"	f
+CheckCMOVNBE	./instrument_functions.c	/^ADDRINT CheckCMOVNBE(ADDRINT eflags)$/;"	f
+CheckCMOVNL	./instrument_functions.c	/^ADDRINT CheckCMOVNL(ADDRINT eflags)$/;"	f
+CheckCMOVNLE	./instrument_functions.c	/^ADDRINT CheckCMOVNLE(ADDRINT eflags)$/;"	f
+CheckCMOVNO	./instrument_functions.c	/^ADDRINT CheckCMOVNO(ADDRINT eflags)$/;"	f
+CheckCMOVNP	./instrument_functions.c	/^ADDRINT CheckCMOVNP(ADDRINT eflags)$/;"	f
+CheckCMOVNS	./instrument_functions.c	/^ADDRINT CheckCMOVNS(ADDRINT eflags)$/;"	f
+CheckCMOVNZ	./instrument_functions.c	/^ADDRINT CheckCMOVNZ(ADDRINT eflags)$/;"	f
+CheckCMOVO	./instrument_functions.c	/^ADDRINT CheckCMOVO(ADDRINT eflags)$/;"	f
+CheckCMOVP	./instrument_functions.c	/^ADDRINT CheckCMOVP(ADDRINT eflags)$/;"	f
+CheckCMOVS	./instrument_functions.c	/^ADDRINT CheckCMOVS(ADDRINT eflags)$/;"	f
+CheckCMOVZ	./instrument_functions.c	/^ADDRINT CheckCMOVZ(ADDRINT eflags)$/;"	f
+CheckEqual_m_r	./instrument_functions.c	/^ADDRINT CheckEqual_m_r(ADDRINT start, ADDRINT size, ADDRINT v2)$/;"	f
+CheckEqual_r_r	./instrument_functions.c	/^ADDRINT CheckEqual_r_r(ADDRINT v1, ADDRINT v2)$/;"	f
+CheckNotEqual_m_r	./instrument_functions.c	/^ADDRINT CheckNotEqual_m_r(ADDRINT start, ADDRINT size, ADDRINT v2)$/;"	f
+CheckNotEqual_r_r	./instrument_functions.c	/^ADDRINT CheckNotEqual_r_r(ADDRINT v1, ADDRINT v2)$/;"	f
+ClearTaintForMemory	./dytan.cpp	/^void ClearTaintForMemory(ADDRINT start, ADDRINT size)$/;"	f
+ClearTaintForMemory	./old/penumbra.cpp	/^void ClearTaintForMemory(ADDRINT start, ADDRINT size)$/;"	f
+ClearTaintForRegister	./dytan.cpp	/^void ClearTaintForRegister(REG reg)$/;"	f
+ClearTaintForRegister	./old/penumbra.cpp	/^void ClearTaintForRegister(REG reg)$/;"	f
+ClearTaintSet	./dytan.cpp	/^void ClearTaintSet(bitset *set)$/;"	f
+ClearTaintSet	./old/penumbra.cpp	/^void ClearTaintSet(bitset *set)$/;"	f
+ConstantTaintGenerator	./include/taint_generator.h	/^  ConstantTaintGenerator(int seed) {$/;"	f	class:ConstantTaintGenerator
+ConstantTaintGenerator	./include/taint_generator.h	/^class ConstantTaintGenerator: public TaintGenerator$/;"	c
+Controlflow	./dytan.cpp	/^static void Controlflow(RTN rtn, void *v)$/;"	f	file:
+Controlflow	./old/penumbra.cpp	/^static void Controlflow(RTN rtn, void *v)$/;"	f	file:
+DEST_IP	./sample/network/http_client.c	40;"	d	file:
+DEST_PAGE	./sample/network/http_client.c	41;"	d	file:
+DIV_OPCODE	./divide_by_zero_linux.c	73;"	d	file:
+DYTAN_display	./sample/network/http_client.c	/^void DYTAN_display(void * addr, size_t size, char *fmt, ...) {}$/;"	f
+DYTAN_display	./sample/wc/wc.c	/^void DYTAN_display(void * addr, size_t size, char *fmt, ...) {}$/;"	f
+DYTAN_tag	./sample/wc/wc.c	/^void DYTAN_tag(void *addr, size_t size, char *name) {}$/;"	f
+Dataflow	./dytan.cpp	/^static void Dataflow(INS ins, void *v)$/;"	f	file:
+Dataflow	./old/penumbra.cpp	/^static void Dataflow(INS ins, void *v)$/;"	f	file:
+DisplayTagsForByteRange	./replace_functions.cpp	/^void DisplayTagsForByteRange(ADDRINT start, size_t size, char *fmt, ...)$/;"	f
+DivideByZero	./divide_by_zero_linux.c	/^int DivideByZero()$/;"	f
+DivideByZero	./divide_by_zero_windows.c	/^int DivideByZero()$/;"	f
+DivideByZeroRetPoint	./divide_by_zero_linux.c	/^void *DivideByZeroRetPoint;$/;"	v
+DivideHandler	./emudiv.cpp	/^EXCEPT_HANDLING_RESULT DivideHandler(THREADID tid, EXCEPTION_INFO * pExceptInfo, $/;"	f
+DumpBufferToFile	./buffer_linux.cpp	/^VOID MLOG::DumpBufferToFile( struct MEMREF * reference, UINT64 numElements, THREADID tid )$/;"	f	class:MLOG
+EXPORT_SYM	./divide_by_zero_windows.c	33;"	d	file:
+EmptyHandler	./instrument_functions.c	/^static void EmptyHandler(INS ins, void *v)$/;"	f	file:
+EmulateIntDivide	./emudiv.cpp	/^VOID EmulateIntDivide(ADDRINT * pGdx, ADDRINT * pGax, ADDRINT divisor, CONTEXT * ctxt, THREADID tid)$/;"	f
+EmulateMemDivide	./emudiv.cpp	/^VOID EmulateMemDivide(ADDRINT * pGdx, ADDRINT * pGax, ADDRINT *pDivisor, unsigned int opSize, CONTEXT * ctxt, THREADID tid)$/;"	f
+Fini	./buffer_windows.cpp	/^VOID Fini(INT32 code, VOID *v)$/;"	f
+Fini	./strace.cpp	/^VOID Fini(INT32 code, VOID *v)$/;"	f
+FollowChild	./follow_child_tool.cpp	/^BOOL FollowChild(CHILD_PROCESS childProcess, VOID * userData)$/;"	f
+FunctionTaintSource	./include/taint_source_func.h	/^class FunctionTaintSource {$/;"	c
+FunctionTaintSource	./taint_source_func.cpp	/^FunctionTaintSource::FunctionTaintSource()$/;"	f	class:FunctionTaintSource
+GlobalHandler	./emudiv.cpp	/^EXCEPT_HANDLING_RESULT GlobalHandler(THREADID threadIndex, EXCEPTION_INFO * pExceptInfo, $/;"	f
+Handle_ACCESS	./syscall_functions.cpp	/^void Handle_ACCESS(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_ALARM	./syscall_functions.cpp	/^void Handle_ALARM(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_BRK	./syscall_functions.cpp	/^void Handle_BRK(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_CHMOD	./syscall_functions.cpp	/^void Handle_CHMOD(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_CLOSE	./syscall_functions.cpp	/^void Handle_CLOSE(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_DUP	./syscall_functions.cpp	/^void Handle_DUP(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_FCNTL64	./syscall_functions.cpp	/^void Handle_FCNTL64(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_FLOCK	./syscall_functions.cpp	/^void Handle_FLOCK(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_FSTAT64	./syscall_functions.cpp	/^void Handle_FSTAT64(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_FSYNC	./syscall_functions.cpp	/^void Handle_FSYNC(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_FTRUNCATE	./syscall_functions.cpp	/^void Handle_FTRUNCATE(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_GETDENTS64	./syscall_functions.cpp	/^void Handle_GETDENTS64(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_GETPID	./syscall_functions.cpp	/^void Handle_GETPID(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_GETTID	./syscall_functions.cpp	/^void Handle_GETTID(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_GETTIMEOFDAY	./syscall_functions.cpp	/^void Handle_GETTIMEOFDAY(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_GETUID32	./syscall_functions.cpp	/^void Handle_GETUID32(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_IOCTL	./syscall_functions.cpp	/^void Handle_IOCTL(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_LINK	./syscall_functions.cpp	/^void Handle_LINK(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_LLSEEK	./syscall_functions.cpp	/^void Handle_LLSEEK(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_LSEEK	./syscall_functions.cpp	/^void Handle_LSEEK(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_LSTAT64	./syscall_functions.cpp	/^void Handle_LSTAT64(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_MMAP	./syscall_functions.cpp	/^void Handle_MMAP(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_MMAP2	./syscall_functions.cpp	/^void Handle_MMAP2(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_MPROTECT	./syscall_functions.cpp	/^void Handle_MPROTECT(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_MUNMAP	./syscall_functions.cpp	/^void Handle_MUNMAP(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_OPEN	./syscall_functions.cpp	/^void Handle_OPEN(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_POLL	./syscall_functions.cpp	/^void Handle_POLL(INT32 num, syscall_arguments args, void *v)$/;"	f
+Handle_READ	./syscall_functions.cpp	/^void Handle_READ(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_READLINK	./syscall_functions.cpp	/^void Handle_READLINK(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_RENAME	./syscall_functions.cpp	/^void Handle_RENAME(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_RT_SIGACTION	./syscall_functions.cpp	/^void Handle_RT_SIGACTION(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_RT_SIGPROCMASK	./syscall_functions.cpp	/^void Handle_RT_SIGPROCMASK(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_SET_THREAD_AREA	./syscall_functions.cpp	/^void Handle_SET_THREAD_AREA(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_SOCKETCALL	./syscall_functions.cpp	/^void Handle_SOCKETCALL(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_STAT64	./syscall_functions.cpp	/^void Handle_STAT64(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_TGKILL	./syscall_functions.cpp	/^void Handle_TGKILL(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_TIME	./syscall_functions.cpp	/^void Handle_TIME(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_UNAME	./syscall_functions.cpp	/^void Handle_UNAME(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_UNLINK	./syscall_functions.cpp	/^void Handle_UNLINK(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_UTIME	./syscall_functions.cpp	/^void Handle_UTIME(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_WRITE	./syscall_functions.cpp	/^void Handle_WRITE(INT32 num, syscall_arguments args, void * v)$/;"	f
+Handle_WRITEV	./syscall_functions.cpp	/^void Handle_WRITEV(INT32 num, syscall_arguments args, void * v)$/;"	f
+IMPLICIT	./include/dytan.h	98;"	d
+IMPLICIT	./old/penumbra.cpp	80;"	d	file:
+IS_DISP32_MODE	./divide_by_zero_linux.c	80;"	d	file:
+IS_DISP8_MODE	./divide_by_zero_linux.c	79;"	d	file:
+IS_REG_MODE	./divide_by_zero_linux.c	78;"	d	file:
+ImageLoad	./taint_source_func.cpp	/^VOID ImageLoad(IMG img, VOID *v)$/;"	f
+Instruction	./strace.cpp	/^VOID Instruction(INS ins, VOID *v)$/;"	f
+InstrumentDivide	./emudiv.cpp	/^VOID InstrumentDivide(INS ins, VOID* v)$/;"	f
+InstrumentFunction	./include/dytan.h	/^typedef void (*InstrumentFunction)(INS ins, void *v);$/;"	t
+InstrumentFunction	./old/penumbra.cpp	/^typedef void (*InstrumentFunction)(INS ins, void *v);$/;"	t	file:
+Instrument_ADC	./instrument_functions.c	/^static void Instrument_ADC(INS ins, void *v)$/;"	f	file:
+Instrument_ADD	./instrument_functions.c	/^static void Instrument_ADD(INS ins, void *v)$/;"	f	file:
+Instrument_AND	./instrument_functions.c	/^static void Instrument_AND(INS ins, void *v)$/;"	f	file:
+Instrument_BSF	./instrument_functions.c	/^static void Instrument_BSF(INS ins, void *v)$/;"	f	file:
+Instrument_BSR	./instrument_functions.c	/^static void Instrument_BSR(INS ins, void *v)$/;"	f	file:
+Instrument_BSWAP	./instrument_functions.c	/^static void Instrument_BSWAP(INS ins, void *v)$/;"	f	file:
+Instrument_BT	./instrument_functions.c	/^static void Instrument_BT(INS ins, void *v)$/;"	f	file:
+Instrument_CALL_NEAR	./instrument_functions.c	/^static void Instrument_CALL_NEAR(INS ins, void *v)$/;"	f	file:
+Instrument_CDQ	./instrument_functions.c	/^static void Instrument_CDQ(INS ins, void *v)$/;"	f	file:
+Instrument_CLD	./instrument_functions.c	/^static void Instrument_CLD(INS ins, void *v)$/;"	f	file:
+Instrument_CMOVcc	./instrument_functions.c	/^static void Instrument_CMOVcc(INS ins, void *v)$/;"	f	file:
+Instrument_CMP	./instrument_functions.c	/^static void Instrument_CMP(INS ins, void *v)$/;"	f	file:
+Instrument_CMPSB	./instrument_functions.c	/^static void Instrument_CMPSB(INS ins, void *v)$/;"	f	file:
+Instrument_CMPXCHG	./instrument_functions.c	/^static void Instrument_CMPXCHG(INS ins, void *v)$/;"	f	file:
+Instrument_CPUID	./instrument_functions.c	/^static void Instrument_CPUID(INS ins, void *v)$/;"	f	file:
+Instrument_CWDE	./instrument_functions.c	/^static void Instrument_CWDE(INS ins, void *v)$/;"	f	file:
+Instrument_DEC	./instrument_functions.c	/^static void Instrument_DEC(INS ins, void *v)$/;"	f	file:
+Instrument_DIV	./instrument_functions.c	/^static void Instrument_DIV(INS ins, void *v)$/;"	f	file:
+Instrument_Eflags	./instrument_functions.c	/^static void Instrument_Eflags(INS ins, void *v)$/;"	f	file:
+Instrument_FADDP	./instrument_functions.c	/^static void Instrument_FADDP(INS ins, void *v)$/;"	f	file:
+Instrument_FDIV	./instrument_functions.c	/^static void Instrument_FDIV(INS ins, void *v)$/;"	f	file:
+Instrument_FDIVRP	./instrument_functions.c	/^static void Instrument_FDIVRP(INS ins, void *v)$/;"	f	file:
+Instrument_FILD	./instrument_functions.c	/^static void Instrument_FILD(INS ins, void *v)$/;"	f	file:
+Instrument_FISTP	./instrument_functions.c	/^static void Instrument_FISTP(INS ins, void *v)$/;"	f	file:
+Instrument_FLD	./instrument_functions.c	/^static void Instrument_FLD(INS ins, void *v)$/;"	f	file:
+Instrument_FLDCW	./instrument_functions.c	/^static void Instrument_FLDCW(INS ins, void *v)$/;"	f	file:
+Instrument_FLDZ	./instrument_functions.c	/^static void Instrument_FLDZ(INS ins, void *v)$/;"	f	file:
+Instrument_FNSTCW	./instrument_functions.c	/^static void Instrument_FNSTCW(INS ins, void *v)$/;"	f	file:
+Instrument_FNSTSW	./instrument_functions.c	/^static void Instrument_FNSTSW(INS ins, void *v)$/;"	f	file:
+Instrument_FST	./instrument_functions.c	/^static void Instrument_FST(INS ins, void *v)$/;"	f	file:
+Instrument_FSTP	./instrument_functions.c	/^static void Instrument_FSTP(INS ins, void *v)$/;"	f	file:
+Instrument_FUCOM	./instrument_functions.c	/^static void Instrument_FUCOM(INS ins, void *v)$/;"	f	file:
+Instrument_FXCH	./instrument_functions.c	/^static void Instrument_FXCH(INS ins, void *v)$/;"	f	file:
+Instrument_HLT	./instrument_functions.c	/^static void Instrument_HLT(INS ins, void *v)$/;"	f	file:
+Instrument_IDIV	./instrument_functions.c	/^static void Instrument_IDIV(INS ins, void *v)$/;"	f	file:
+Instrument_IMUL	./instrument_functions.c	/^static void Instrument_IMUL(INS ins, void *v)$/;"	f	file:
+Instrument_INC	./instrument_functions.c	/^static void Instrument_INC(INS ins, void *v)$/;"	f	file:
+Instrument_INT	./instrument_functions.c	/^static void Instrument_INT(INS ins, void *v)$/;"	f	file:
+Instrument_JMP	./instrument_functions.c	/^static void Instrument_JMP(INS ins, void *v)$/;"	f	file:
+Instrument_Jcc	./instrument_functions.c	/^static void Instrument_Jcc(INS ins, void *v)$/;"	f	file:
+Instrument_LAHF	./instrument_functions.c	/^static void Instrument_LAHF(INS ins, void *v)$/;"	f	file:
+Instrument_LDMXCSR	./instrument_functions.c	/^static void Instrument_LDMXCSR(INS ins, void *v)$/;"	f	file:
+Instrument_LEA	./instrument_functions.c	/^static void Instrument_LEA(INS ins, void *v)$/;"	f	file:
+Instrument_LEAVE	./instrument_functions.c	/^static void Instrument_LEAVE(INS ins, void *v)$/;"	f	file:
+Instrument_MOV	./instrument_functions.c	/^static void Instrument_MOV(INS ins, void *v)$/;"	f	file:
+Instrument_MOVS	./instrument_functions.c	/^static void Instrument_MOVS(INS ins, void *v) $/;"	f	file:
+Instrument_MOVSB	./instrument_functions.c	/^static void Instrument_MOVSB(INS ins, void *v)$/;"	f	file:
+Instrument_MOVSD	./instrument_functions.c	/^static void Instrument_MOVSD(INS ins, void *v)$/;"	f	file:
+Instrument_MOVSW	./instrument_functions.c	/^static void Instrument_MOVSW(INS ins, void *v)$/;"	f	file:
+Instrument_MOVSX	./instrument_functions.c	/^static void Instrument_MOVSX(INS ins, void *v)$/;"	f	file:
+Instrument_MOVZX	./instrument_functions.c	/^static void Instrument_MOVZX(INS ins, void *v)$/;"	f	file:
+Instrument_MUL	./instrument_functions.c	/^static void Instrument_MUL(INS ins, void *v)$/;"	f	file:
+Instrument_NEG	./instrument_functions.c	/^static void Instrument_NEG(INS ins, void *v)$/;"	f	file:
+Instrument_NOP	./instrument_functions.c	/^static void Instrument_NOP(INS ins, void *v)$/;"	f	file:
+Instrument_NOT	./instrument_functions.c	/^static void Instrument_NOT(INS ins, void *v)$/;"	f	file:
+Instrument_OR	./instrument_functions.c	/^static void Instrument_OR(INS ins, void *v)$/;"	f	file:
+Instrument_PAUSE	./instrument_functions.c	/^static void Instrument_PAUSE(INS ins, void *v)$/;"	f	file:
+Instrument_POP	./instrument_functions.c	/^static void Instrument_POP(INS ins, void *v)$/;"	f	file:
+Instrument_POPFD	./instrument_functions.c	/^static void Instrument_POPFD(INS ins, void *v)$/;"	f	file:
+Instrument_PUSH	./instrument_functions.c	/^static void Instrument_PUSH(INS ins, void *v)$/;"	f	file:
+Instrument_PUSHFD	./instrument_functions.c	/^static void Instrument_PUSHFD(INS ins, void *v)$/;"	f	file:
+Instrument_RDTSC	./instrument_functions.c	/^static void Instrument_RDTSC(INS ins, void *v)$/;"	f	file:
+Instrument_RET_NEAR	./instrument_functions.c	/^static void Instrument_RET_NEAR(INS ins, void *v)$/;"	f	file:
+Instrument_ROL	./instrument_functions.c	/^static void Instrument_ROL(INS ins, void *v)$/;"	f	file:
+Instrument_ROR	./instrument_functions.c	/^static void Instrument_ROR(INS ins, void *v)$/;"	f	file:
+Instrument_SAHF	./instrument_functions.c	/^static void Instrument_SAHF(INS ins, void *v)$/;"	f	file:
+Instrument_SAR	./instrument_functions.c	/^static void Instrument_SAR(INS ins, void *v)$/;"	f	file:
+Instrument_SBB	./instrument_functions.c	/^static void Instrument_SBB(INS ins, void *v)$/;"	f	file:
+Instrument_SCASB	./instrument_functions.c	/^static void Instrument_SCASB(INS ins, void *v)$/;"	f	file:
+Instrument_SETcc	./instrument_functions.c	/^static void Instrument_SETcc(INS ins, void *v)$/;"	f	file:
+Instrument_SHL	./instrument_functions.c	/^static void Instrument_SHL(INS ins, void *v)$/;"	f	file:
+Instrument_SHLD	./instrument_functions.c	/^static void Instrument_SHLD(INS ins, void *v)$/;"	f	file:
+Instrument_SHR	./instrument_functions.c	/^static void Instrument_SHR(INS ins, void *v)$/;"	f	file:
+Instrument_SHRD	./instrument_functions.c	/^static void Instrument_SHRD(INS ins, void *v)$/;"	f	file:
+Instrument_STD	./instrument_functions.c	/^static void Instrument_STD(INS ins, void *v) $/;"	f	file:
+Instrument_STMXCSR	./instrument_functions.c	/^static void Instrument_STMXCSR(INS ins, void *v)$/;"	f	file:
+Instrument_STOSB	./instrument_functions.c	/^static void Instrument_STOSB(INS ins, void *v)$/;"	f	file:
+Instrument_STOSD	./instrument_functions.c	/^static void Instrument_STOSD(INS ins, void *v)$/;"	f	file:
+Instrument_SUB	./instrument_functions.c	/^static void Instrument_SUB(INS ins, void *v)$/;"	f	file:
+Instrument_TEST	./instrument_functions.c	/^static void Instrument_TEST(INS ins, void *v)$/;"	f	file:
+Instrument_XADD	./instrument_functions.c	/^static void Instrument_XADD(INS ins, void *v)$/;"	f	file:
+Instrument_XCHG	./instrument_functions.c	/^static void Instrument_XCHG(INS ins, void *v)$/;"	f	file:
+Instrument_XOR	./instrument_functions.c	/^static void Instrument_XOR(INS ins, void *v)$/;"	f	file:
+MAXBUF	./sample/network/http_client.c	36;"	d	file:
+MEMREF	./buffer_linux.cpp	/^struct MEMREF$/;"	s	file:
+MEMREF	./buffer_windows.cpp	/^struct MEMREF$/;"	s	file:
+MLOG	./buffer_linux.cpp	/^MLOG::MLOG(THREADID tid)$/;"	f	class:MLOG
+MLOG	./buffer_linux.cpp	/^class MLOG$/;"	c	file:
+MODRM_DISP32	./divide_by_zero_linux.c	76;"	d	file:
+MODRM_DISP8	./divide_by_zero_linux.c	75;"	d	file:
+MODRM_REG	./divide_by_zero_linux.c	74;"	d	file:
+NUMBER_OF_TAINT_MARKS	./dytan.cpp	/^int NUMBER_OF_TAINT_MARKS = 4096;$/;"	v
+NUMBER_OF_TAINT_MARKS	./old/penumbra.cpp	69;"	d	file:
+NUM_BUF_PAGES	./buffer_linux.cpp	67;"	d	file:
+NUM_BUF_PAGES	./buffer_windows.cpp	80;"	d	file:
+NetworkAddress	./include/monitor_network.h	/^struct NetworkAddress {$/;"	s
+NetworkAddress_cmp	./include/monitor_network.h	/^struct NetworkAddress_cmp {$/;"	s
+NetworkMonitor	./include/monitor_network.h	/^class NetworkMonitor {$/;"	c
+NetworkMonitor	./monitor_network.cpp	/^NetworkMonitor::NetworkMonitor(SyscallMonitor *monitor, bool observeAll)$/;"	f	class:NetworkMonitor
+NetworkMonitorCallback	./include/monitor_network.h	/^typedef void (*NetworkMonitorCallback)(NetworkAddress, ADDRINT, size_t, void *);$/;"	t
+NetworkTaintSource	./include/taint_source_network.h	/^class NetworkTaintSource {$/;"	c
+NetworkTaintSource	./taint_source_network.cpp	/^NetworkTaintSource::NetworkTaintSource(SyscallMonitor *syscallMonitor, bool observeEverything)$/;"	f	class:NetworkTaintSource
+OF_MASK	./instrument_functions.c	45;"	d	file:
+PANIC	./sample/network/http_client.c	38;"	d	file:
+PF_MASK	./instrument_functions.c	41;"	d	file:
+PathMonitor	./include/monitor_path.h	/^class PathMonitor {$/;"	c
+PathMonitor	./monitor_path.cpp	/^PathMonitor::PathMonitor(SyscallMonitor *monitor, bool observeAll)$/;"	f	class:PathMonitor
+PathMonitorCallback	./include/monitor_path.h	/^typedef void (*PathMonitorCallback)(string, syscall_arguments, void *);$/;"	t
+PathTaintSource	./include/taint_source_path.h	/^class PathTaintSource {$/;"	c
+PathTaintSource	./taint_source_path.cpp	/^PathTaintSource::PathTaintSource(SyscallMonitor *syscallMonitor, bool observeEverything)$/;"	f	class:PathTaintSource
+PerByte	./include/taint_source.h	/^    PerByte,$/;"	e	enum:__anon2
+PerRead	./include/taint_source.h	/^    PerRead,$/;"	e	enum:__anon2
+PopControl	./dytan.cpp	/^void PopControl(int n, ...)$/;"	f
+PopControl	./old/penumbra.cpp	/^void PopControl(int n, ...)$/;"	f
+Print	./dytan.cpp	/^void Print(ADDRINT address, string *disas)$/;"	f
+Print	./old/penumbra.cpp	/^void Print(ADDRINT address, string *disas)$/;"	f
+PushControl	./dytan.cpp	/^void PushControl(ADDRINT addr)$/;"	f
+PushControl	./old/penumbra.cpp	/^void PushControl(ADDRINT addr)$/;"	f
+REG_IP	./divide_by_zero_linux.c	58;"	d	file:
+REG_IP	./divide_by_zero_linux.c	60;"	d	file:
+RTN_INTERNAL_RANGE	./statica.cpp	/^}RTN_INTERNAL_RANGE;$/;"	t	typeref:struct:__anon1	file:
+RandomSetTaintGenerator	./include/taint_generator.h	/^  RandomSetTaintGenerator(int start, int num) {$/;"	f	class:RandomSetTaintGenerator
+RandomSetTaintGenerator	./include/taint_generator.h	/^class RandomSetTaintGenerator: public TaintGenerator$/;"	c
+ReplaceUserFunctions	./replace_functions.cpp	/^void ReplaceUserFunctions(IMG img, void *v)$/;"	f
+SF_MASK	./instrument_functions.c	44;"	d	file:
+SetNewTaintForMemory	./dytan.cpp	/^void SetNewTaintForMemory(ADDRINT addr, ADDRINT size, int taint_mark)$/;"	f
+SetTaintForMemory	./dytan.cpp	/^void SetTaintForMemory(ADDRINT start, ADDRINT size, int numOfArgs, ...)$/;"	f
+SetTaintForMemory	./old/penumbra.cpp	/^void SetTaintForMemory(ADDRINT start, ADDRINT size, ...)$/;"	f
+SetTaintForRegister	./dytan.cpp	/^void SetTaintForRegister(REG dest, int numOfArgs, ...)$/;"	f
+SetTaintForRegister	./old/penumbra.cpp	/^void SetTaintForRegister(REG dest, ...)$/;"	f
+SetTrace	./replace_functions.cpp	/^void SetTrace(int trace)$/;"	f
+SysAfter	./dytan.cpp	/^VOID SysAfter(THREADID threadIndex, CONTEXT *ctxt, SYSCALL_STANDARD std, VOID *val)$/;"	f
+SysAfter	./strace.cpp	/^VOID SysAfter(ADDRINT ret)$/;"	f
+SysBefore	./dytan.cpp	/^VOID SysBefore(THREADID threadIndex, CONTEXT *ctxt, SYSCALL_STANDARD std, VOID *val)$/;"	f
+SysBefore	./strace.cpp	/^VOID SysBefore(ADDRINT ip, ADDRINT num, ADDRINT arg0, ADDRINT arg1, ADDRINT arg2, ADDRINT arg3, ADDRINT arg4, ADDRINT arg5)$/;"	f
+SyscallEntry	./strace.cpp	/^VOID SyscallEntry(THREADID threadIndex, CONTEXT *ctxt, SYSCALL_STANDARD std, VOID *v)$/;"	f
+SyscallExit	./strace.cpp	/^VOID SyscallExit(THREADID threadIndex, CONTEXT *ctxt, SYSCALL_STANDARD std, VOID *v)$/;"	f
+TRACE	./include/dytan.h	91;"	d
+TaintForMemory	./dytan.cpp	/^void TaintForMemory(ADDRINT start, ADDRINT size,$/;"	f
+TaintForMemory	./old/penumbra.cpp	/^void TaintForMemory(ADDRINT start, ADDRINT size,$/;"	f
+TaintForRegister	./dytan.cpp	/^void TaintForRegister(REG reg, bitset *set)$/;"	f
+TaintForRegister	./old/penumbra.cpp	/^void TaintForRegister(REG reg, bitset *set)$/;"	f
+TaintGenerator	./include/taint_generator.h	/^    TaintGenerator() {$/;"	f	class:TaintGenerator
+TaintGenerator	./include/taint_generator.h	/^    TaintGenerator(int start, int max) {$/;"	f	class:TaintGenerator
+TaintGenerator	./include/taint_generator.h	/^class TaintGenerator$/;"	c
+TaintMainArgs	./old/penumbra.cpp	/^void TaintMainArgs(ADDRINT *argcAddr, ADDRINT *argvAddr)$/;"	f
+ThreadFini	./buffer_linux.cpp	/^VOID ThreadFini(THREADID tid, const CONTEXT *ctxt, INT32 code, VOID *v)$/;"	f
+ThreadStart	./buffer_linux.cpp	/^VOID ThreadStart(THREADID tid, CONTEXT *ctxt, INT32 flags, VOID *v)$/;"	f
+Trace	./buffer_linux.cpp	/^VOID Trace(TRACE trace, VOID *v)$/;"	f
+Trace	./buffer_windows.cpp	/^VOID Trace(TRACE trace, VOID *v)$/;"	f
+Trace	./dytan.cpp	/^static void Trace(INS ins, void *v)$/;"	f	file:
+Trace	./old/penumbra.cpp	/^static void Trace(INS ins, void *v)$/;"	f	file:
+UnimplementedInstruction	./instrument_functions.c	/^void UnimplementedInstruction(INS ins, void * v)$/;"	f
+UnimplementedSystemCall	./syscall_functions.cpp	/^void UnimplementedSystemCall(INT32 num, syscall_arguments args, void * v)$/;"	f
+Usage	./buffer_linux.cpp	/^INT32 Usage()$/;"	f
+Usage	./buffer_windows.cpp	/^INT32 Usage()$/;"	f
+Usage	./emudiv.cpp	/^INT32 Usage()$/;"	f
+Usage	./fork_jit_tool.cpp	/^INT32 Usage()$/;"	f
+Usage	./statica.cpp	/^INT32 Usage()$/;"	f
+Usage	./strace.cpp	/^INT32 Usage()$/;"	f
+WrapMain	./old/penumbra.cpp	/^static void WrapMain(RTN rtn, void *v)$/;"	f	file:
+ZF_MASK	./instrument_functions.c	43;"	d	file:
+_BITSET_H_	./include/bitset.h	40;"	d
+_CONFIG_PARSER_H	./include/config_parser.h	40;"	d
+_DYTAN_H	./include/dytan.h	40;"	d
+_NETWORK_MONITOR_H_	./include/monitor_network.h	40;"	d
+_PATH_MONITOR_H_	./include/monitor_path.h	40;"	d
+_REPLACE_FUNCTIONS_H	./include/replace_functions.h	40;"	d
+_SYSCALL_FUNCTIONS_H	./include/syscall_functions.h	40;"	d
+_TAINT_GENERATOR_H_	./include/taint_generator.h	40;"	d
+_TAINT_SOURCE_FUNC_H	./include/taint_source_func.h	40;"	d
+_TAINT_SOURCE_H_	./include/taint_source.h	40;"	d
+_TAINT_SOURCE_NETWORK_H_	./include/taint_source_network.h	40;"	d
+_TAINT_SOURCE_PATH_H_	./include/taint_source_path.h	40;"	d
+__TAINT_FUNC_ARGS__	./include/taint_func_args.h	40;"	d
+__USE_GNU	./divide_by_zero_linux.c	40;"	d	file:
+__USE_GNU	./divide_by_zero_linux.c	48;"	d	file:
+_current	./include/taint_generator.h	/^    int _current;$/;"	m	class:TaintGenerator
+_max	./include/taint_generator.h	/^    int _max;$/;"	m	class:TaintGenerator
+_num	./include/taint_generator.h	/^  int _num;$/;"	m	class:RandomSetTaintGenerator
+_ofile	./buffer_linux.cpp	/^    ofstream _ofile;$/;"	m	class:MLOG	file:
+_seed	./include/taint_generator.h	/^  int _seed;$/;"	m	class:ConstantTaintGenerator
+_start	./include/taint_generator.h	/^  int _start;$/;"	m	class:RandomSetTaintGenerator
+action	./include/config_parser.h	/^    string action;$/;"	m	struct:sink
+activate	./monitor_network.cpp	/^void NetworkMonitor::activate()$/;"	f	class:NetworkMonitor
+activate	./monitor_path.cpp	/^void PathMonitor::activate()$/;"	f	class:PathMonitor
+activeFileDescriptors	./include/monitor_path.h	/^  map<int, string> activeFileDescriptors;$/;"	m	class:PathMonitor
+actual_location	./include/config_parser.h	/^    vector<string> actual_location;$/;"	m	struct:location
+addActiveFileDescriptor	./monitor_path.cpp	/^void PathMonitor::addActiveFileDescriptor(int fd, string pathname)$/;"	f	class:PathMonitor
+addFunctionSource	./taint_source_func.cpp	/^void FunctionTaintSource::addFunctionSource(string funcName, TaintGenerator *gen)$/;"	f	class:FunctionTaintSource
+addNetworkSource	./taint_source_network.cpp	/^void NetworkTaintSource::addNetworkSource(string host_ip, string host_port, $/;"	f	class:NetworkTaintSource
+addObserverForAll	./taint_source_network.cpp	/^void NetworkTaintSource::addObserverForAll(taint_range_t type)$/;"	f	class:NetworkTaintSource
+addObserverForAll	./taint_source_path.cpp	/^void PathTaintSource::addObserverForAll(taint_range_t type)$/;"	f	class:PathTaintSource
+addPathSource	./taint_source_path.cpp	/^void PathTaintSource::addPathSource(string pathname, taint_range_t type)$/;"	f	class:PathTaintSource
+addressObservers	./include/monitor_network.h	/^        map<NetworkAddress, vector<pair<NetworkMonitorCallback, void *> >, NetworkAddress_cmp > addressObservers;$/;"	m	class:NetworkMonitor
+allObserver	./include/monitor_network.h	/^        pair<NetworkMonitorCallback, void *> *allObserver;$/;"	m	class:NetworkMonitor
+allObserver	./include/monitor_path.h	/^  pair<PathMonitorCallback, void *> *allObserver;$/;"	m	class:PathMonitor
+base	./dytan.cpp	/^bitset *base;$/;"	v
+base	./old/penumbra.cpp	/^bitset *base;$/;"	v
+bits	./include/bitset.h	/^  size_t *bits;$/;"	m	struct:__anon3
+bitset	./include/bitset.h	/^} bitset;$/;"	t	typeref:struct:__anon3
+bitset_clear_bit	./bitset.cpp	/^void bitset_clear_bit(bitset *set, size_t pos) {$/;"	f
+bitset_copy	./bitset.cpp	/^bitset *bitset_copy(const bitset *set) {$/;"	f
+bitset_difference	./bitset.cpp	/^void bitset_difference(bitset *dest, const bitset *src) {$/;"	f
+bitset_equal	./bitset.cpp	/^bool bitset_equal(const bitset *a, const bitset *b) {$/;"	f
+bitset_free	./bitset.cpp	/^void bitset_free(bitset *set) {$/;"	f
+bitset_init	./bitset.cpp	/^bitset *bitset_init(size_t nbits) {$/;"	f
+bitset_intersection	./bitset.cpp	/^void bitset_intersection(bitset *dest, const bitset *src) {$/;"	f
+bitset_is_empty	./bitset.cpp	/^bool bitset_is_empty(const bitset *set) {$/;"	f
+bitset_is_subset	./bitset.cpp	/^bool bitset_is_subset(const bitset *a, const bitset *b) {$/;"	f
+bitset_population	./bitset.cpp	/^size_t bitset_population(const bitset * s) {$/;"	f
+bitset_print	./bitset.cpp	/^void bitset_print(FILE *f, const bitset *set) {$/;"	f
+bitset_reset	./bitset.cpp	/^void bitset_reset(bitset *set) {$/;"	f
+bitset_set_bit	./bitset.cpp	/^void bitset_set_bit(bitset *set, size_t pos) {$/;"	f
+bitset_set_bits	./bitset.cpp	/^void bitset_set_bits(bitset *dest, const bitset *src) {$/;"	f
+bitset_size	./bitset.cpp	/^size_t bitset_size(const bitset *set) {$/;"	f
+bitset_str	./bitset.cpp	/^char * bitset_str(const bitset *set) {$/;"	f
+bitset_test_bit	./bitset.cpp	/^bool bitset_test_bit(const bitset *set, size_t pos) {$/;"	f
+bitset_toggle_bit	./bitset.cpp	/^void bitset_toggle_bit(bitset *set, size_t pos) {$/;"	f
+bitset_union	./bitset.cpp	/^void bitset_union(bitset *dest, const bitset *src) {$/;"	f
+bitset_union_n	./bitset.cpp	/^void bitset_union_n(bitset *dest, ...) {$/;"	f
+bitset_xor	./bitset.cpp	/^void bitset_xor(bitset *dest, const bitset * src) {$/;"	f
+bufId	./buffer_linux.cpp	/^BUFFER_ID bufId;$/;"	v
+bufId	./buffer_windows.cpp	/^BUFFER_ID bufId;$/;"	v
+cleanup	./dytan.cpp	/^void cleanup(void)$/;"	f
+closeCallback	./monitor_path.cpp	/^void closeCallback(INT32 syscall_num,$/;"	f
+closeNetworkCallback	./monitor_network.cpp	/^void closeNetworkCallback(INT32 syscall_num, syscall_arguments args, void *v)$/;"	f
+cnt	./dytan.cpp	/^bitset *cnt;$/;"	v
+cnt	./old/penumbra.cpp	/^bitset *cnt;$/;"	v
+config	./include/config_parser.h	/^struct config {$/;"	s
+controlFlowTainting	./dytan.cpp	/^bool controlFlowTainting; $/;"	v
+controlTaintMap	./dytan.cpp	/^map<ADDRINT, bitset *> controlTaintMap;$/;"	v
+controlTaintMap	./old/penumbra.cpp	/^map<ADDRINT, bitset *> controlTaintMap;$/;"	v
+controlflow	./include/config_parser.h	/^    bool controlflow;$/;"	m	struct:propagation
+convert	./include/dytan.h	/^inline void convert(const std::string& s, T& x,$/;"	f
+convertTo	./include/dytan.h	/^inline T convertTo(const std::string& s,$/;"	f
+currentTaintMark	./old/penumbra.cpp	/^int currentTaintMark = 0;$/;"	v
+dataflow	./include/config_parser.h	/^    bool dataflow;$/;"	m	struct:propagation
+defaultAddressObserver	./include/monitor_network.h	/^        pair<NetworkMonitorCallback, void *> *defaultAddressObserver;$/;"	m	class:NetworkMonitor
+defaultObserver	./include/monitor_path.h	/^  pair<PathMonitorCallback, void *> *defaultObserver;$/;"	m	class:PathMonitor
+dest	./dytan.cpp	/^bitset *dest;$/;"	v
+dest	./old/penumbra.cpp	/^bitset *dest;$/;"	v
+details	./include/config_parser.h	/^    vector<string> details;$/;"	m	struct:source
+div0_signal_handler	./divide_by_zero_linux.c	/^void div0_signal_handler(int signum, siginfo_t *siginfo, void *uctxt) $/;"	f
+ea	./buffer_linux.cpp	/^    ADDRINT     ea;$/;"	m	struct:MEMREF	file:
+ea	./buffer_windows.cpp	/^    ADDRINT     ea;$/;"	m	struct:MEMREF	file:
+eax	./dytan.cpp	/^bitset *eax;$/;"	v
+eax	./old/penumbra.cpp	/^bitset *eax;$/;"	v
+edx	./dytan.cpp	/^bitset *edx;$/;"	v
+edx	./old/penumbra.cpp	/^bitset *edx;$/;"	v
+eflags	./dytan.cpp	/^bitset *eflags;$/;"	v
+eflags	./old/penumbra.cpp	/^bitset *eflags;$/;"	v
+end	./statica.cpp	/^    ADDRINT end;$/;"	m	struct:__anon1	file:
+fileLock	./buffer_windows.cpp	/^PIN_LOCK fileLock;$/;"	v
+func_source	./dytan.cpp	/^FunctionTaintSource *func_source;$/;"	v
+functions	./include/taint_source_func.h	/^    vector<string> functions;$/;"	m	class:FunctionTaintSource
+granularity	./include/config_parser.h	/^    string granularity;$/;"	m	struct:source
+id	./include/config_parser.h	/^    string id;$/;"	m	struct:sink
+idx	./dytan.cpp	/^bitset *idx;$/;"	v
+idx	./old/penumbra.cpp	/^bitset *idx;$/;"	v
+instrument_functions	./dytan.cpp	/^InstrumentFunction instrument_functions[XED_ICLASS_LAST];$/;"	v
+instrument_functions	./old/penumbra.cpp	/^InstrumentFunction instrument_functions[XEDICLASS_LAST];$/;"	v
+ip	./include/monitor_network.h	/^    uint32_t ip;$/;"	m	struct:NetworkAddress
+loc	./include/config_parser.h	/^    location loc;$/;"	m	struct:sink
+location	./include/config_parser.h	/^struct location {$/;"	s
+lock	./fork_jit_tool.cpp	/^PIN_LOCK lock;$/;"	v
+log	./dytan.cpp	/^std::ofstream log;$/;"	v
+main	./buffer_linux.cpp	/^int main(int argc, char *argv[])$/;"	f
+main	./buffer_windows.cpp	/^int main(int argc, char *argv[])$/;"	f
+main	./divide_by_zero_linux.c	/^int main()$/;"	f
+main	./divide_by_zero_windows.c	/^int main()$/;"	f
+main	./dytan.cpp	/^int main(int argc, char **argv)$/;"	f
+main	./emudiv.cpp	/^int main(int argc, char * argv[])$/;"	f
+main	./follow_child_app1.cpp	/^int main(int argc, char **argv)$/;"	f
+main	./follow_child_app2.cpp	/^int main(int argc, char **argv)$/;"	f
+main	./follow_child_tool.cpp	/^int main(INT32 argc, CHAR **argv)$/;"	f
+main	./fork_app.cpp	/^int main()$/;"	f
+main	./fork_jit_tool.cpp	/^int main(INT32 argc, CHAR **argv)$/;"	f
+main	./old/penumbra.cpp	/^int main(int argc, char* argv[])$/;"	f
+main	./sample/network/http_client.c	/^int main(int Count, char *Strings[])$/;"	f
+main	./sample/wc/wc.c	/^int main (int argc, char **argv)$/;"	f
+main	./statica.cpp	/^int main(INT32 argc, CHAR **argv)$/;"	f
+main	./strace.cpp	/^int main(int argc, char *argv[])$/;"	f
+main_wrapper_func	./taint_func_args.cpp	/^void main_wrapper_func(ADDRINT *argcAddr, ADDRINT *argvAddr)$/;"	f
+memTaintMap	./dytan.cpp	/^map<ADDRINT, bitset *> memTaintMap;$/;"	v
+memTaintMap	./old/penumbra.cpp	/^map<ADDRINT, bitset *> memTaintMap;$/;"	v
+mlog_key	./buffer_linux.cpp	/^TLS_KEY mlog_key;$/;"	v
+monitor	./include/taint_source_network.h	/^        NetworkMonitor *monitor;$/;"	m	class:NetworkTaintSource
+monitor	./include/taint_source_path.h	/^  PathMonitor *monitor;$/;"	m	class:PathTaintSource
+nbits	./include/bitset.h	/^  size_t nbits;$/;"	m	struct:__anon3
+networkReadCallbackPerByte	./taint_source_network.cpp	/^void networkReadCallbackPerByte(NetworkAddress networkAddr, ADDRINT start, size_t length, void *v)$/;"	f
+networkReadCallbackPerRead	./taint_source_network.cpp	/^void networkReadCallbackPerRead(NetworkAddress networkAddr, ADDRINT start, size_t length, void *v)$/;"	f
+networkReadDefault	./taint_source_network.cpp	/^void networkReadDefault(NetworkAddress networkAddr, ADDRINT start, size_t length, void *v)$/;"	f
+network_source	./dytan.cpp	/^NetworkTaintSource *network_source;$/;"	v
+nextTaintMark	./include/taint_generator.h	/^    virtual int nextTaintMark() {$/;"	f	class:TaintGenerator
+nextTaintMark	./include/taint_generator.h	/^  int nextTaintMark() {$/;"	f	class:ConstantTaintGenerator
+nextTaintMark	./include/taint_generator.h	/^  int nextTaintMark() {$/;"	f	class:RandomSetTaintGenerator
+notifyForRead	./monitor_network.cpp	/^void NetworkMonitor::notifyForRead(syscall_arguments args, $/;"	f	class:NetworkMonitor
+notifyForRead	./monitor_path.cpp	/^void PathMonitor::notifyForRead(syscall_arguments args)$/;"	f	class:PathMonitor
+num_markings	./include/config_parser.h	/^    string num_markings;$/;"	m	struct:config
+observeAddress	./monitor_network.cpp	/^void NetworkMonitor::observeAddress(string ip, string port,$/;"	f	class:NetworkMonitor
+observeEverything	./include/monitor_network.h	/^        bool observeEverything;$/;"	m	class:NetworkMonitor
+observeEverything	./include/monitor_path.h	/^  bool observeEverything;$/;"	m	class:PathMonitor
+observePath	./monitor_path.cpp	/^void PathMonitor::observePath(string pathname,$/;"	f	class:PathMonitor
+observers	./include/monitor_path.h	/^  map<string, vector< pair<PathMonitorCallback, void *> > > observers;$/;"	m	class:PathMonitor
+ofile	./buffer_windows.cpp	/^ofstream ofile;$/;"	v
+openCallback	./monitor_path.cpp	/^void openCallback(INT32 syscall_num,$/;"	f
+openFiles	./syscall_functions.cpp	/^map<int, string> openFiles;$/;"	v
+operator ()	./include/monitor_network.h	/^    bool operator()(const NetworkAddress &a, const NetworkAddress &b) {$/;"	f	struct:NetworkAddress_cmp
+parent_pid	./fork_jit_tool.cpp	/^pid_t parent_pid;$/;"	v
+parseConfig	./config_parser.cpp	/^int parseConfig( int argc, char **argv, config *conf ){$/;"	f
+parsePropagation	./config_parser.cpp	/^void parsePropagation(xmlDocPtr doc, xmlNodePtr cur, config *conf)$/;"	f
+parseSinks	./config_parser.cpp	/^void parseSinks(xmlDocPtr doc, xmlNodePtr cur, config *conf)$/;"	f
+parseSources	./config_parser.cpp	/^void parseSources(xmlDocPtr doc, xmlNodePtr cur, config *conf)$/;"	f
+pathSourceReadCallbackPerByte	./taint_source_path.cpp	/^void pathSourceReadCallbackPerByte(string pathname,$/;"	f
+pathSourceReadCallbackPerRead	./taint_source_path.cpp	/^void pathSourceReadCallbackPerRead(string pathname, $/;"	f
+pathSourceReadDefault	./taint_source_path.cpp	/^void pathSourceReadDefault(string pathname, $/;"	f
+path_source	./dytan.cpp	/^PathTaintSource *path_source;$/;"	v
+pc	./buffer_linux.cpp	/^    ADDRINT     pc;$/;"	m	struct:MEMREF	file:
+pc	./buffer_windows.cpp	/^    ADDRINT     pc;$/;"	m	struct:MEMREF	file:
+port	./include/monitor_network.h	/^    short port;$/;"	m	struct:NetworkAddress
+prop	./include/config_parser.h	/^    propagation prop;$/;"	m	struct:config
+propagation	./include/config_parser.h	/^struct propagation {$/;"	s
+read	./buffer_linux.cpp	/^    BOOL        read;$/;"	m	struct:MEMREF	file:
+read	./buffer_windows.cpp	/^    UINT32      read;$/;"	m	struct:MEMREF	file:
+readCallback	./monitor_path.cpp	/^void readCallback(INT32 syscall_num,$/;"	f
+readNetworkCallback	./monitor_network.cpp	/^void readNetworkCallback(INT32 num, syscall_arguments args, void *v)$/;"	f
+regTaintMap	./dytan.cpp	/^map<REG, bitset *> regTaintMap;$/;"	v
+regTaintMap	./old/penumbra.cpp	/^map<REG, bitset *> regTaintMap;$/;"	v
+registerAddressDefault	./monitor_network.cpp	/^void NetworkMonitor::registerAddressDefault(NetworkMonitorCallback callback,$/;"	f	class:NetworkMonitor
+registerCallbackForAll	./monitor_network.cpp	/^void NetworkMonitor::registerCallbackForAll(NetworkMonitorCallback callback, void *v)$/;"	f	class:NetworkMonitor
+registerCallbackForAll	./monitor_path.cpp	/^void PathMonitor::registerCallbackForAll(PathMonitorCallback callback, void *v)$/;"	f	class:PathMonitor
+registerDefault	./monitor_path.cpp	/^void PathMonitor::registerDefault(PathMonitorCallback callback, void *v)$/;"	f	class:PathMonitor
+removeActiveFileDescriptor	./monitor_path.cpp	/^void PathMonitor::removeActiveFileDescriptor(int fd)$/;"	f	class:PathMonitor
+rtnInternalRangeList	./statica.cpp	/^vector< RTN_INTERNAL_RANGE> rtnInternalRangeList;$/;"	v
+set_framework_options	./dytan.cpp	/^int set_framework_options(config *conf, SyscallMonitor *monitor)$/;"	f
+sink	./include/config_parser.h	/^struct sink {$/;"	s
+sinks	./include/config_parser.h	/^    vector<sink> sinks;$/;"	m	struct:config
+size	./buffer_linux.cpp	/^    UINT32      size;$/;"	m	struct:MEMREF	file:
+size	./buffer_windows.cpp	/^    UINT32      size;$/;"	m	struct:MEMREF	file:
+socketToAddress	./include/monitor_network.h	/^        map<uint32_t, NetworkAddress> socketToAddress;$/;"	m	class:NetworkMonitor
+socketcallNetworkCallback	./monitor_network.cpp	/^void socketcallNetworkCallback(INT32 num, syscall_arguments args, void *v)$/;"	f
+source	./include/config_parser.h	/^struct source {$/;"	s
+sources	./include/config_parser.h	/^    vector<source> sources;$/;"	m	struct:config
+src	./dytan.cpp	/^bitset *src;$/;"	v
+src	./old/penumbra.cpp	/^bitset *src;$/;"	v
+start	./statica.cpp	/^    ADDRINT start;$/;"	m	struct:__anon1	file:
+strAddress	./include/monitor_network.h	/^    string strAddress;$/;"	m	struct:NetworkAddress
+syscallMonitor	./include/monitor_network.h	/^        SyscallMonitor *syscallMonitor;$/;"	m	class:NetworkMonitor
+syscallMonitor	./include/monitor_path.h	/^  SyscallMonitor *syscallMonitor;$/;"	m	class:PathMonitor
+tagMap	./replace_functions.cpp	/^map<string, int> tagMap;$/;"	v
+taintAssignmentLog	./dytan.cpp	/^std::ofstream  taintAssignmentLog;$/;"	v
+taintAssignmentLog	./old/penumbra.cpp	/^FILE *taintAssignmentLog;$/;"	v
+taintGen	./dytan.cpp	/^TaintGenerator *taintGen;$/;"	v
+taint_function	./taint_func_args.cpp	/^string taint_function[] =  { "main", "foo", "bar" };$/;"	v
+taint_range_t	./include/taint_source.h	/^} taint_range_t;$/;"	t	typeref:enum:__anon2
+taint_return_val	./taint_source_func.cpp	/^void taint_return_val() {$/;"	f
+taint_routines	./taint_func_args.cpp	/^void taint_routines(RTN rtn, void *v)$/;"	f
+tid	./buffer_windows.cpp	/^    THREADID    tid;$/;"	m	struct:MEMREF	file:
+trace	./strace.cpp	/^FILE * trace;$/;"	v
+tracing	./dytan.cpp	/^bool tracing;$/;"	v
+tracing	./old/penumbra.cpp	/^bool tracing;$/;"	v
+type	./include/config_parser.h	/^    string type;$/;"	m	struct:location
+type	./include/config_parser.h	/^    string type;$/;"	m	struct:source
+~FunctionTaintSource	./taint_source_func.cpp	/^FunctionTaintSource::~FunctionTaintSource()$/;"	f	class:FunctionTaintSource
+~MLOG	./buffer_linux.cpp	/^MLOG::~MLOG()$/;"	f	class:MLOG
+~NetworkMonitor	./monitor_network.cpp	/^NetworkMonitor::~NetworkMonitor()$/;"	f	class:NetworkMonitor
+~NetworkTaintSource	./taint_source_network.cpp	/^NetworkTaintSource::~NetworkTaintSource()$/;"	f	class:NetworkTaintSource
+~PathMonitor	./monitor_path.cpp	/^PathMonitor::~PathMonitor()$/;"	f	class:PathMonitor
+~PathTaintSource	./taint_source_path.cpp	/^PathTaintSource::~PathTaintSource()$/;"	f	class:PathTaintSource
+~TaintGenerator	./include/taint_generator.h	/^    virtual ~TaintGenerator() {}$/;"	f	class:TaintGenerator

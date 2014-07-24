@@ -1,0 +1,197 @@
+Dytan is a dynamic taint analysis framework that allows users to
+implement different kinds of dynamic taint analyses. This file
+discusses the features of Dytan that can be accessed through the
+high-level XML interface. The use of Dytan's core without leveraging
+the interface is described in file internals.txt
+
+====================================
+Prerequisites
+====================================
+
+Dytan is based on PIN version 2.2-13635-gcc.4.0.0-ia32-linux. To
+download and install the right version of PIN, users should execute
+script "setup-pin.sh", which is provided with the distribution.
+Because of recent changes in the Linux kernel, this version of PIN
+does not work correctly on the most recent Linux distributions. We use
+Linux kernel version 2.6.15. More precisely, we recommend users to
+install Dytan on a machine running Ubuntu 6.06, which is the platform
+on which it was tested.
+
+To be able to compile Dytan, it is necessary to install the libxml2
+development library (package libxml2-dev for Debian/Ubuntu users).
+
+Control-flow based taint propagation leverages post-dominance
+information computed by one of Dytan's modules. In the presence of
+indirect jumps in the code, postdominance information is not computed
+and a special basic block is added in the position where the jump is.
+To alleviate this issue, it is recommended to pre-process the source
+code of the programs under analysis using CIL, whenever possible. CIL
+eliminates some of the constructs that cause indirect jumps in the
+code, such as "switch" statements.
+
+====================================
+Dytan's features and configuration
+====================================
+
+The implementation of Dytan's interface is still work in progress. As
+of now, Dytan allows users to:
+
+- Taint specific arguments of a function.
+- Taint arbitrary memory ranges (from within a program).
+- Taint data originating from a file
+- Taint data originating from a network connection
+
+Dytan's interface does not support yet function return values.
+
+Dytan's configuration
+---------------------
+
+Most of Dytan's options can be configured by modifying a configuration
+file called "config.xml. Examples of configuration files are provided
+with the distribution (in the "root" and in the "sample" folders). The
+config file contains information about propagation policies, sources,
+and sinks.
+
+The propagation policy is defined in the <propagation> section. By
+specifying the <controlflow> tag as "false" or "true", users can
+define whether propagation should occur only through data dependences
+or through both data and control dependences. (Note that our current
+implementation accounts for information flows due to direct control
+dependences only, that is, flows due to the fact that something is not
+executed are not considered.)
+
+Taint sources are specified in the <sources> section. Within the
+section, tag <taint-marks> is used to specify the number of unique
+taint marks Dytan should use. For example, the following config
+fragment would tell Dytan to use 32 unique taint marks (after all
+marks have been used, Dytan starts reassigning them):
+
+<sources>
+    <taint-marks>32</taint-marks>
+    ...
+</sources>
+
+Currently, users can specify two kinds of taint sources in the config
+file: files and network connections. To specify specific arguments of
+a function or arbitrary memory ranges, users need to directly modify
+the program or Dytan, respectively, as discussed below.
+
+Files can be specified as sources in the config file as follows:
+
+<sources>
+    ...
+    <source type="path">
+        <file>path/to/file1/filename1</file>
+        <file>path/to/file2/filename2</file>
+        <granularity>PerRead</granularity>
+    </source>
+    ...
+</sources>
+
+Note that, due to a current limitation of the implementation, Dytan
+identifies file sources by matching the path used by the program with
+the one specified in the <source> section. Therefore, the file path
+specified in the config file should match what the program uses.
+
+The <granularity> tag specifies the level of granularity at which
+taint marks are assigned. Value "PerRead" tells Dytan to taint all the
+bytes read by "read" operation with a single taint mark. conversely,
+value "PerByte" specifies that each byte read should be tainted with a
+different taint mark. 
+
+To taint data coming from a network connection, the user must add to
+the config file a section in the following format:
+
+<sources>
+    ...
+    <source type="network">
+        <host>127.0.0.1</host>
+        <port>80</port>
+        <granularity>PerRead</granularity>
+    </source>
+    ...
+</sources>
+
+There can be multiple <source> entries in the configuration file.
+
+How to taint specific arguments of a function
+---------------------------------------------
+
+To taint function arguments, users must modify the functions in file
+taint_func_args.cpp. After modifying the file, Dytan must be
+recompiled by invoking "make" in the root directory of the
+distribution.  As an example, the version of the file in the
+distribution contains code to taint arguments to the "main" function.
+Please refer to that file for a better understanding of the next
+paragraph, which describes how to modify file taint_func_args.cpp.
+
+The string array "taint_function" should contain the names of the
+routines whose parameters are to be tainted. In function
+"taint_routines(RTN, void *)", there should be an if block for each of
+the functions in the "taint_function" array. Each of these blocks
+should use PIN API to insert a call to a suitably defined wrapper
+before the original function is executed. This is accomplished by
+using PIN API function "RTN_InsertCall". This function takes the
+following arguments:
+
+- RTN rtn: the original function.
+- IPOINT_BEFORE: tells PIN to insert the call before rtn's entry.
+- AFUNPTR(<wrapper name>): specifies the wrapper function's name.
+- Assuming that rtn has n arguments:
+   - IARG_FUNCARG_ENTRYPOINT_REFERENCE, 0,
+   - IARG_FUNCARG_ENTRYPOINT_REFERENCE, 1,
+   - ...
+   - IARG_FUNCARG_ENTRYPOINT_REFERENCE, n,
+- IARG_END: tells RTN_InsertCall that there are no more parameters.
+
+The wrapper function is the place where the tainting actually occurs.
+It takes n arguments of type "ADDRINT *", where n is the number of
+arguments of the original function. For each parameter to be tainted,
+the wrapper calls Dytan's memory tainting function, which takes three
+parameters: the starting address of the parameter's memory location,
+the size of the parameter in bytes, and the numeric value of the taint
+mark to be associated with the parameter.  See function
+"main_wrapper_func" in file taint_func_args.cpp for an example of a
+wrapper.
+
+How to taint arbitrary memory ranges
+------------------------------------
+
+To taint arbitrary memory ranges from within your program, make a call
+to function
+
+  DYTAN_tag(ADDRINT start_address, size_t size, char * name)
+
+where size is the size of the memory to be tainted and name is the
+string to be associated with this taint mark.
+
+Analogously, to display taint marks at a particular memory location
+from within your program, make a call to function
+
+  DYTAN_display(ADDRINT start_address, size_t size, char *fmt)
+
+where fmt is the format in which the taint marks should be displayed.
+
+The sample program provided with this distribution, available in
+directory "sample/wc", makes the above calls for tainting memory and
+displaying memory taint marks.  See file internals.txt for
+instructions on how to compile the sample program.
+
+====================================
+Running Dytan
+====================================
+
+After configuring and recompiling Dytan, it can be run by executing:
+
+./run-dytan <program_name>
+
+For example, to run Dytan on the provided example, go to the root
+directory of the distribution and run
+
+./run-dytan sample/wc/wc sample/wc/a.txt
+
+====================================
+Internals
+====================================
+
+See internals.txt for details on the internals of Dytan.

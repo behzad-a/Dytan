@@ -1,0 +1,46 @@
+TARGET_COMPILER?=gnu
+#PIN_HOME?=/home/snagg/pin-2.7-29972-gcc.3.4.6-ia32_intel64-linux
+PIN_HOME?=pin
+INCL?=./include
+include $(PIN_HOME)/source/tools/makefile.gnu.config
+LINKER ?=${CXX}
+CXXFLAGS ?= -g -I$(INCL) -I/usr/include/libxml2 -Wall $(DBG) $(OPT) -MMD
+
+EXTRA_LIBS = -L/usr/lib -lxml2
+
+HEADERS_DYTAN = $(INCL)/*.h
+
+OBJS_DYTAN = config_parser.o bitset.o dytan.o monitor_path.o monitor_network.o \
+	   taint_source_path.o taint_source_network.o taint_source_func.o \
+	   replace_functions.o syscall_functions.o taint_func_args.o 
+	
+OBJS_PENUMBRA = bitset.o penumbra.o replace_functions.o syscall_functions.o   
+
+TOOL_ROOTS = penumbra dytan
+TOOLS = $(TOOL_ROOTS:%=%$(PINTOOL_SUFFIX))
+
+all: dytan$(PINTOOL_SUFFIX)
+
+tools: $(TOOLS)
+
+penumbra.o : instrument_functions.c
+dytan.o : instrument_functions.c $(HEADERS_DYTAN)
+
+#%.o : %.cpp
+#	$(CXX) -c $(CXXFLAGS) $(PIN_CXXFLAGS) ${OUTOPT}$@ $<
+
+## build rules
+
+%.o : %.cpp
+	${CXX} ${COPT} $(CXXFLAGS) ${PIN_CXXFLAGS} ${OUTOPT}$@ $<
+
+penumbra$(PINTOOL_SUFFIX) : $(OBJS_PENUMBRA) $(PIN_LIBNAMES)
+	${LINKER} $(PIN_LDFLAGS) $(LINK_DEBUG) $(OBJS_PENUMBRA) ${LINK_OUT}$@ ${PIN_LPATHS} $(PIN_LIBS) $(EXTRA_LIBS) $(DBG)
+
+dytan$(PINTOOL_SUFFIX) : $(OBJS_DYTAN) $(PIN_LIBNAMES)
+	${LINKER} $(PIN_LDFLAGS) $(LINK_DEBUG) $(OBJS_DYTAN) ${LINK_OUT}$@ ${PIN_LPATHS} $(PIN_LIBS) $(EXTRA_LIBS) $(DBG)
+
+
+## cleaning
+clean:
+	-rm -f *.o $(TOOLS) *out *.tested *.failed *.d *.lib *.exp *~ *.log

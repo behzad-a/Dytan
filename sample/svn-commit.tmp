@@ -1,0 +1,13 @@
+
+--This line, and those below, will be ignored--
+
+A    copy
+A    copy/src.txt
+A    copy/out.log
+A    copy/copy.asm
+A    copy/copy.c
+A    copy/dest.txt
+A    copy/makefile
+A    copy/taint-log.log
+A    copy/config.xml.old
+A    copy/config.xml

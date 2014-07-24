@@ -1,0 +1,5 @@
+#!/bin/sh
+
+DYTAN=~/dytan
+PIN=~/pin
+$PIN/Bin/pin -t $DYTAN/dytan -- ./fetch

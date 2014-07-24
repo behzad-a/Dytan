@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PROG=$@
+
+if [ $# == 0 ]; then
+    echo "Usage"
+    echo "$0 <command line>"
+    exit
+fi
+
+PINHOME=~/code/pin-2.12-58423-gcc.4.4.7-linux
+DYTAN=~/code/dytan/obj-intel64
+$PINHOME/pin -appdebug -t $DYTAN/dytan -- $PROG

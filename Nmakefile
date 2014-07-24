@@ -1,0 +1,26 @@
+######################################################################################
+# This is the NMAKE file for building and testing PIN toos contained in one of the
+# subdirectories of the PinTool project or PIN kit. 
+#
+# For description of targets and options, see Nmakefile in the root directory.  
+######################################################################################
+
+#PIN_HOME2=C:\Documents and Settings\Henrique\Desktop\pin-2.10-45467-msvc8-ia32_intel64-windows
+#INCLUDE=$(PIN_HOME2)\extras\xed2-ia32\include;$(PIN_HOME2)\extras\components\include;$(PIN_HOME2)\source\include\gen;$(PIN_HOME2)\source\include;$(INCLUDE)
+#C:\cygwin\usr\include;C:\MinGW\msys\1.0\home\Henrique\libxml2-2.7.8\include;
+
+!if "$(PIN_HOME)"==""
+PIN_HOME=..
+!endif
+
+# Define tools to be buit and tested
+######################################################################################
+COMMON_TOOLS= bitset.dll config_parser.dll monitor_network.dll \
+	monitor_path.dll replace_functions.dll syscall_functions.dll \
+	taint_func_args.dll taint_source_func.dll taint_source_network.dll \
+	taint_source_path.dll dytan.dll
+
+# Include building and testing rules from the root Nmakefile. 
+######################################################################################
+INCLUDE_SUB_RULES=1
+!INCLUDE $(PIN_HOME)\Nmakefile 

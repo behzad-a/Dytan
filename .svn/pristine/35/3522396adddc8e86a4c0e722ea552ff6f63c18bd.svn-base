@@ -1,0 +1,66 @@
+##############################################################
+#
+# This file includes all the test targets as well as all the
+# non-default build rules and test recipes.
+#
+##############################################################
+
+
+##############################################################
+#
+# Test targets
+#
+##############################################################
+
+###### Place all generic definitions here ######
+
+# This defines all the applications that will be run during the tests.
+APP_ROOTS := cp-pin
+
+# This defines any additional object files that need to be compiled.
+OBJECT_ROOTS :=
+
+###### Place OS-specific definitions here ######
+
+# Linux
+ifeq ($(TARGET_OS),linux)
+    APP_ROOTS += avx_check avx2_check tsx_check
+    OBJECT_ROOTS += threadlib avx_check_$(TARGET) supports_avx supports_avx2 tsx_check_$(TARGET)
+endif
+
+# Windows
+ifeq ($(TARGET_OS),windows)
+    APP_ROOTS += avx_check avx2_check tsx_check
+    OBJECT_ROOTS += threadlib avx_check_$(TARGET) supports_avx supports_avx2 tsx_check_$(TARGET)
+endif
+
+
+##############################################################
+#
+# Build rules
+#
+##############################################################
+
+# This section contains the build rules for all binaries that have special build rules.
+# See makefile.default.rules for the default build rules.
+
+###### Special applications' build rules ######
+
+# The test application should be compiled wihtout any additional libraries,
+# especially libpthread.so (on Linux) so omit the APP_LIBS variable.
+$(OBJDIR)cp-pin$(EXE_SUFFIX): cp-pin.cpp
+	$(APP_CXX) $(APP_CXXFLAGS) $(COMP_EXE)$@ $< $(APP_LDFLAGS) $(CXX_LPATHS) $(CXX_LIBS)
+
+$(OBJDIR)avx_check$(EXE_SUFFIX): avx_check.c $(OBJDIR)avx_check_$(TARGET)$(OBJ_SUFFIX)
+	$(APP_CC) $(APP_CXXFLAGS) $(COMP_EXE)$@ $^ $(APP_LDFLAGS)
+
+$(OBJDIR)avx2_check$(EXE_SUFFIX): avx2_check.c $(OBJDIR)supports_avx2$(OBJ_SUFFIX)
+	$(APP_CC) $(APP_CXXFLAGS) $(COMP_EXE)$@ $^ $(APP_LDFLAGS)
+
+$(OBJDIR)tsx_check$(EXE_SUFFIX): tsx_check.c $(OBJDIR)tsx_check_$(TARGET)$(OBJ_SUFFIX)
+	$(APP_CC) $(APP_CXXFLAGS) $(COMP_EXE)$@ $^ $(APP_LDFLAGS)
+
+###### Special objects' build rules ######
+
+$(OBJDIR)threadlib$(OBJ_SUFFIX): threadlib_$(OS_TYPE).c threadlib.h
+	$(APP_CC) $(APP_CXXFLAGS) $(COMP_OBJ)$@ $<

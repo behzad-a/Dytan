@@ -1,0 +1,13 @@
+sources type = network:
+		 host: 127.0.0.1
+		 port: 80
+		 granularity: PerRead
+max taint marks = 32
+
+dataflow :true
+controlflow :false
+id = 36
+location type = instruction:
+		 instruction ret
+		 instruction jmp
+Unhanded operand width: 64 for mul rdx

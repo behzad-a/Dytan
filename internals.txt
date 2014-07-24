@@ -1,0 +1,53 @@
+====================================
+Dytan internals:
+====================================
+
+To get a better understanding of how Dytan operates, the best place to
+start is file "instrument_functions.cpp".  This file contains the
+modeling/propagation code for x86 instructions.
+
+As an example, consider the propagation code for ADD in function
+"Instrument_ADD".  The comments around and in that function give a
+code idea of how the propagation works and what needs to be done to
+model additional instructions.
+
+Currently, Dytan handles a subset of x86 instructions.  There are too
+many instructions to make it worth while to implement code that
+handles all of them, unless they are necessary. Therefore, we decided
+to implement such code on demand, based on the instructions we found
+in the subjects we analyzed. If Dytan encounters an instruction that
+is not yet supported, it aborts and prints a message that indicates
+the unhandled instruction in file "out.log". To fix the issue, it is
+necessary to (1) add a function that handles the instruction in file
+"instrument_functions.cpp" and (2) add an entry to the dataflow
+dispatch table that beings at line 858 in file "dytan.cpp".  The index
+in the table is a XEDICLASS enumeration type.  This is typically
+XEDICLASS_<instruction nmenonic in caps>.
+
+We followed a similar on-demand approach in implementing the code that
+models the effect of system calls. Also in this case, Dytan will print
+a diagnostic message to out.log and abort if it encounters a system
+call that it does not handle yet.  The procedure for fixing missing
+system calls is similar to the one for fixing missing instructions.
+The code for modeling system calls is located in file
+"syscall_functions.cpp".  When a new system call is added, an entry
+should also be added to the system call handler in file "dytan.cpp",
+which starts at line 1097.  The first parameter to function
+"addObserver" is the system call number, the second parameter is the
+handler function in file "syscall_functions.cpp", and the third
+parameter should be 0.
+
+One additional feature of Dytan is that it provides and API that can
+be leveraged by client programs (see the example program
+"sample/wc/wc.c" for a simple example).  There are a few caveats to
+keep in mind when using Dytan's API. First, to eliminate the need to
+link with Dytan during compilation, it is necessary to provide dummy
+implementations of the API functions used.  PIN is used to replace the
+dummy implementations with Dytan's implementation at runtime. Second,
+because the dummy implementations are usually empty, they get inlined
+unless parameter "-O0" is specified as a compilation option for the
+code under analysis. (If the functions get inlined, PIN cannot replace
+their implementation at runtime, which prevents them from being
+executed.)
+
+Dytan's implementation of the API is in file "replace_functions.cpp". 

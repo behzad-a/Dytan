@@ -1,0 +1,10 @@
+#ifndef dat_file___ 
+#define
+typedef struct _datFile {
+	int index;
+	int start[256];
+	int end[256];
+} datFile;
+
+extern datFile dat;
+#endif

@@ -1,0 +1,2 @@
+Pin 2.12 kit 58423
+E: Unable to load /home/behzad/code/dytan/obj-intel64/dytan.so: /home/behzad/code/dytan/obj-intel64/dytan.so: undefined symbol: datFile
