@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
   int count;
 
   printf("i:%p, j:%p, k:%p, buf:%p, config:%p\n", &i, &j, &k, buf, &config);
-  DYTAN_tag((char *)&i, sizeof(i), "i");
+  //DYTAN_tag((char *)&i, sizeof(i), "i");
   j = i * 2;
   k = i / 2;
   printf("%d %d %d\n", i, j, k);
@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
 	  printf("config.dir at %p\nconfig.filename at %p\nconfig.mode at %p\nconfig.test at %p\n", &(config.dir), &(config.filename), &(config.mode), &(config.test));
   } else
 	  printf("Error: cannot open conf file!\n");
-  DYTAN_display(buf, count, "Buf");
+  //DYTAN_display(buf, count, "Buf");
 
   return 0;
 }

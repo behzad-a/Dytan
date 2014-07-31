@@ -1,2 +1,8 @@
 Pin 2.12 kit 58423
-E: Unable to load /home/behzad/code/dytan/obj-intel64/dytan.so: /home/behzad/code/dytan/obj-intel64/dytan.so: undefined symbol: datFile
+E: Attach to pid 3249 failed. 
+  The Operating System configuration prevents Pin from using the default (parent) injection mode.
+  To resolve this, either execute the following (as root):
+  $ echo 0 > /proc/sys/kernel/yama/ptrace_scope
+  Or use the "-injection child" option.
+  For more information, regarding child injection, see Injection section in the Pin User Manual.
+

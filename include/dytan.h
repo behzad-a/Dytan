@@ -59,6 +59,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <sys/utsname.h>
 #include <sys/stat.h>
 #include "bitset.h"
+#include "tag_memset.h"
 
 #include "taint_generator.h"
 
@@ -112,6 +113,13 @@ extern map<ADDRINT, bitset *> memTaintMap;
  * map that stores taint marks active due to control flow
  */
 extern map<ADDRINT, bitset *>controlTaintMap;
+
+/*
+ * map that stores memory addresses for taint marks
+ */
+extern map<size_t, memlist *> tagMemoryMap;
+
+extern bool tagMemoryMap_isInitialized;
 
 typedef void (*InstrumentFunction)(INS ins, void *v);
 

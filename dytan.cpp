@@ -55,6 +55,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 map<REG, bitset *> regTaintMap;
 map<ADDRINT, bitset *> memTaintMap;
 map<ADDRINT, bitset *> controlTaintMap;
+map<size_t, memlist *> tagMemoryMap;
 
 std::ofstream log;
 std::ofstream  taintAssignmentLog;
@@ -565,6 +566,34 @@ void SetTaintForMemory(ADDRINT start, ADDRINT size, int numOfArgs, ...)
         }
   
   bitset_union(tmp, controlTaint);
+
+  if (!tagMemoryMap_isInitialized) {
+    tagMemoryMap_isInitialized = true;
+    for (size_t counter=0; counter<(size_t)NUMBER_OF_TAINT_MARKS; counter++) {
+      tagMemoryMap[counter] = new memlist;
+      tagMemoryMap[counter]->next = NULL;
+    }
+  }
+
+  memlist *elementToAdd;
+  for (map<size_t, memlist*>::iterator iter = tagMemoryMap.begin(); iter != tagMemoryMap.end(); iter++) {
+    if (bitset_test_bit(tmp, iter->first)) {
+      elementToAdd = iter->second;
+      while (true) {
+        if (!(elementToAdd->next)) {
+          break;
+        }  
+        elementToAdd = elementToAdd->next;
+      }
+      for (ADDRINT addr = start; addr < start+size; addr++) {
+        elementToAdd->memAddress =  addr; 
+        elementToAdd->next = new memlist;
+        elementToAdd = elementToAdd->next;
+      }
+      elementToAdd->next = NULL;
+    }
+  }
+
     
 
   for(ADDRINT addr = start; addr < start + size; addr++) {
@@ -959,6 +988,25 @@ void cleanup(void)
 
 void dump_taints(void)
 {
+
+	taintAssignmentLog << "\nMapping from tags to memory addresses:\n";
+    for(map<size_t, memlist *>::iterator iter = tagMemoryMap.begin(); iter != tagMemoryMap.end(); iter++) {
+    	if (iter->second->next) {		
+		string sep = "";
+        	memlist *address = iter->second;
+		taintAssignmentLog << "\t" << std::dec << iter->first << ": [";
+		taintAssignmentLog << std::hex;
+		while (address->next) {
+			taintAssignmentLog << sep << address->memAddress;
+			sep = ", ";
+			address = address->next;
+		}
+		taintAssignmentLog << "]\n";
+        }
+    }
+    taintAssignmentLog << "\n\n";
+
+
 	taintAssignmentLog << "All tainted memory addresses:\n";
     for(map<ADDRINT, bitset *>::iterator iter = memTaintMap.begin(); iter != memTaintMap.end(); iter++) {
 		if (!bitset_is_empty(iter->second)) {
@@ -986,6 +1034,7 @@ void main_wrapper_func_end()
 
 int main(int argc, char **argv)
 {
+    tagMemoryMap_isInitialized = false;
     config *conf = NULL;
     conf = new config;
 
