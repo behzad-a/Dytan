@@ -510,7 +510,27 @@ void ClearTaintForMemory(ADDRINT start, ADDRINT size)
           iter != controlTaintMap.end(); iter++) {
           bitset_union(controlTaint, iter->second);
       }
-    
+
+
+  /*
+  printf ("Clear called!");
+  cout << "ClearTaintForMemory called!";
+  memlist *elementToClear;
+  for (map<size_t, memlist*>::iterator iter = tagMemoryMap.begin(); iter != tagMemoryMap.end(); iter++) {
+    if (!bitset_test_bit(controlTaint, iter->first)) {
+      elementToClear = iter->second;
+      while (elementToClear->next) {
+        if (((elementToClear->next)->memAddress >= start) && ((elementToClear->next)->memAddress < (start+size))) {
+          cout << "Memory address being cleared: " << std::hex << start << "\n";
+	  elementToClear->next = (elementToClear->next)->next;
+        }
+	elementToClear = elementToClear->next;
+      }
+    }
+  }
+  */
+
+  
   for(ADDRINT addr = start; addr < start + size; addr++) {
     map<ADDRINT, bitset *>::iterator iter = memTaintMap.find(addr);
     if(memTaintMap.end() != iter) {
@@ -587,10 +607,35 @@ void SetTaintForMemory(ADDRINT start, ADDRINT size, int numOfArgs, ...)
       }
       for (ADDRINT addr = start; addr < start+size; addr++) {
         elementToAdd->memAddress =  addr; 
+        elementToAdd->isCleared = 0;
         elementToAdd->next = new memlist;
         elementToAdd = elementToAdd->next;
       }
       elementToAdd->next = NULL;
+    }
+    else {
+      elementToAdd = iter->second;
+      int flag;
+      memlist *element;
+      while (elementToAdd->next) {
+        if ((elementToAdd->memAddress >=start) && (elementToAdd->memAddress < start+size) && (!elementToAdd->isCleared)) {
+	  flag = elementToAdd->isCleared;
+          element = elementToAdd;
+          while (element->next) {
+	    element = element->next;
+	    if ((element->next) && (element->memAddress == elementToAdd->memAddress)){
+	      flag = element->isCleared;
+	    }
+	  }
+	  if (!flag) {
+            element->memAddress = elementToAdd->memAddress;
+	    element->isCleared = 1;
+            element->next = new memlist;
+            (element->next)->next = NULL;
+	  }
+        }
+        elementToAdd = elementToAdd->next;
+      }
     }
   }
 
@@ -995,9 +1040,9 @@ void dump_taints(void)
 		string sep = "";
         	memlist *address = iter->second;
 		taintAssignmentLog << "\t" << std::dec << iter->first << ": [";
-		taintAssignmentLog << std::hex;
+		//taintAssignmentLog << std::hex;
 		while (address->next) {
-			taintAssignmentLog << sep << address->memAddress;
+			taintAssignmentLog << sep << std::hex << address->memAddress << "-" << std::dec << address->isCleared << "\n\t";
 			sep = ", ";
 			address = address->next;
 		}

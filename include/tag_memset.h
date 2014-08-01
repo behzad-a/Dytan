@@ -18,6 +18,7 @@ Summer 2014
 
 typedef struct memlist{
     ADDRINT memAddress;
+    int isCleared;
     struct memlist *next;
 } memlist;
 

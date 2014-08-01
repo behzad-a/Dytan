@@ -1,28 +1,126 @@
 Tainted from argc
-2 ->7f92185b5e50-7f92185b5e53
+2 ->7fe185a96e50-7fe185a96e53
 Tainted from argv0
-3 ->7fff5ebb60c8-7fff5ebb60db
+3 ->7fff32be6fe8-7fff32be6ffb
 Tainted from file conf
-4 - conf[0] -> 7f9201839005: 32 '2'
-5 - conf[1] -> 7f920183900c: 63 'c'
-5 - conf[2] -> 7f920183900d: 3a ':'
-5 - conf[3] -> 7f920183900e: 5c '\'
-6 - conf[4] -> 7f920183901a: 69 'i'
-6 - conf[5] -> 7f920183901b: 6e 'n'
-6 - conf[6] -> 7f920183901c: 70 'p'
-6 - conf[7] -> 7f920183901d: 75 'u'
-6 - conf[8] -> 7f920183901e: 74 't'
-6 - conf[9] -> 7f920183901f: 2e '.'
-6 - conf[10] -> 7f9201839020: 64 'd'
-6 - conf[11] -> 7f9201839021: 61 'a'
-6 - conf[12] -> 7f9201839022: 74 't'
-7 - conf[13] -> 7f920183902a: 33 '3'
+4 - conf[0] -> 7fe16ed2a005: 32 '2'
+5 - conf[1] -> 7fe16ed2a00c: 63 'c'
+5 - conf[2] -> 7fe16ed2a00d: 3a ':'
+5 - conf[3] -> 7fe16ed2a00e: 5c '\'
+6 - conf[4] -> 7fe16ed2a01a: 69 'i'
+6 - conf[5] -> 7fe16ed2a01b: 6e 'n'
+6 - conf[6] -> 7fe16ed2a01c: 70 'p'
+6 - conf[7] -> 7fe16ed2a01d: 75 'u'
+6 - conf[8] -> 7fe16ed2a01e: 74 't'
+6 - conf[9] -> 7fe16ed2a01f: 2e '.'
+6 - conf[10] -> 7fe16ed2a020: 64 'd'
+6 - conf[11] -> 7fe16ed2a021: 61 'a'
+7 - conf[12] -> 7fe16ed2a029: 33 '3'
 
 Mapping from tags to memory addresses:
-	4: [7fff5ebb5ed0, 7fff5ebb5ed1, 7fff5ebb5ed2, 7fff5ebb5ed3, 7fff5ebb5ed4, 7fff5ebb5ed5, 7fff5ebb5ed6, 7fff5ebb5ed7]
-	5: [7fff5ebb5ed8, 7fff5ebb5ed9, 7fff5ebb5eda, 7fff5ebb5edb, 7fff5ebb5edc, 7fff5ebb5edd, 7fff5ebb5ede, 7fff5ebb5edf, 7fff5ebb5e78, 7fff5ebb5e79, 7fff5ebb5e7a, 7fff5ebb5e7b, 7fff5ebb5e7c, 7fff5ebb5e7d, 7fff5ebb5e7e, 7fff5ebb5e7f, 602084, 602085, 602086, 602087, 7f9203f6b004, 7f9203f6b005, 7f9203f6b006, 7f9203f6b007]
-	6: [7fff5ebb5ee8, 7fff5ebb5ee9, 7fff5ebb5eea, 7fff5ebb5eeb, 7fff5ebb5eec, 7fff5ebb5eed, 7fff5ebb5eee, 7fff5ebb5eef, 7fff5ebb5ef0, 7fff5ebb5ef1, 7fff5ebb5ef2, 7fff5ebb5ef3, 7fff5ebb5ef4, 602184, 602185, 602186, 602187, 602188, 602189, 60218a, 60218b, 60218b, 60218c, 60218d, 60218e, 7f9203f6b009, 7f9203f6b00a, 7f9203f6b00b, 7f9203f6b00c, 7f9203f6b00d, 7f9203f6b00e, 7f9203f6b00f, 7f9203f6b010, 7f9203f6b011, 7f9203f6b012]
-	7: [7fff5ebb5ef5, 7fff5ebb5ef6, 7fff5ebb5ef7, 7fff5ebb5ef8, 7fff5ebb5ef9, 7fff5ebb5efa, 7fff5ebb5efb, 7fff5ebb5efc]
+	4: [7fff32be6df0-0
+	, 7fff32be6df1-0
+	, 7fff32be6df2-0
+	, 7fff32be6df3-0
+	, 7fff32be6df4-0
+	, 7fff32be6df5-0
+	, 7fff32be6df6-0
+	, 7fff32be6df7-0
+	, 7fff32be6df4-1
+	, 7fff32be6df7-1
+	]
+	5: [7fff32be6df8-0
+	, 7fff32be6df9-0
+	, 7fff32be6dfa-0
+	, 7fff32be6dfb-0
+	, 7fff32be6dfc-0
+	, 7fff32be6dfd-0
+	, 7fff32be6dfe-0
+	, 7fff32be6dff-0
+	, 7fff32be6d98-0
+	, 7fff32be6d99-0
+	, 7fff32be6d9a-0
+	, 7fff32be6d9b-0
+	, 7fff32be6d9c-0
+	, 7fff32be6d9d-0
+	, 7fff32be6d9e-0
+	, 7fff32be6d9f-0
+	, 7fff32be6d98-1
+	, 7fff32be6d99-1
+	, 7fff32be6d9a-1
+	, 7fff32be6d9b-1
+	, 7fff32be6d9c-1
+	, 7fff32be6d9d-1
+	, 7fff32be6d9e-1
+	, 7fff32be6d9f-1
+	, 7fff32be6dfb-1
+	, 602084-0
+	, 602085-0
+	, 602086-0
+	, 602087-0
+	, 7fe17145a004-0
+	, 7fe17145a005-0
+	, 7fe17145a006-0
+	, 7fe17145a007-0
+	, 7fe17145a004-1
+	, 7fe17145a005-1
+	, 7fe17145a006-1
+	, 7fe17145a007-1
+	]
+	6: [7fff32be6e08-0
+	, 7fff32be6e09-0
+	, 7fff32be6e0a-0
+	, 7fff32be6e0b-0
+	, 7fff32be6e0c-0
+	, 7fff32be6e0d-0
+	, 7fff32be6e0e-0
+	, 7fff32be6e0f-0
+	, 7fff32be6e10-0
+	, 7fff32be6e11-0
+	, 7fff32be6e12-0
+	, 7fff32be6e13-0
+	, 7fff32be6e09-1
+	, 7fff32be6e13-1
+	, 602184-0
+	, 602185-0
+	, 602186-0
+	, 602187-0
+	, 602188-0
+	, 602189-0
+	, 60218a-0
+	, 60218b-0
+	, 60218c-0
+	, 60218d-0
+	, 7fe17145a009-0
+	, 7fe17145a00a-0
+	, 7fe17145a00b-0
+	, 7fe17145a00c-0
+	, 7fe17145a00d-0
+	, 7fe17145a00e-0
+	, 7fe17145a00f-0
+	, 7fe17145a010-0
+	, 7fe17145a011-0
+	, 7fe17145a009-1
+	, 7fe17145a00a-1
+	, 7fe17145a00b-1
+	, 7fe17145a00c-1
+	, 7fe17145a00d-1
+	, 7fe17145a00e-1
+	, 7fe17145a00f-1
+	, 7fe17145a010-1
+	, 7fe17145a011-1
+	]
+	7: [7fff32be6e14-0
+	, 7fff32be6e15-0
+	, 7fff32be6e16-0
+	, 7fff32be6e17-0
+	, 7fff32be6e18-0
+	, 7fff32be6e19-0
+	, 7fff32be6e1a-0
+	, 7fff32be6e1b-0
+	, 7fff32be6e18-1
+	, 7fff32be6e1b-1
+	]
 
 
 All tainted memory addresses:
@@ -40,72 +138,69 @@ All tainted memory addresses:
 	60218b - [6]
 	60218c - [6]
 	60218d - [6]
-	60218e - [6]
-	7f9201839005 - [4]
-	7f920183900c - [5]
-	7f920183900d - [5]
-	7f920183900e - [5]
-	7f920183901a - [6]
-	7f920183901b - [6]
-	7f920183901c - [6]
-	7f920183901d - [6]
-	7f920183901e - [6]
-	7f920183901f - [6]
-	7f9201839020 - [6]
-	7f9201839021 - [6]
-	7f9201839022 - [6]
-	7f920183902a - [7]
-	7f92185b5e50 - [2]
-	7f92185b5e51 - [2]
-	7f92185b5e52 - [2]
-	7f92185b5e53 - [2]
-	7fff5ebb5ed0 - [4]
-	7fff5ebb5ed1 - [4]
-	7fff5ebb5ed2 - [4]
-	7fff5ebb5ed3 - [4]
-	7fff5ebb5ed5 - [4]
-	7fff5ebb5ed6 - [4]
-	7fff5ebb5ed8 - [5]
-	7fff5ebb5ed9 - [5]
-	7fff5ebb5eda - [5]
-	7fff5ebb5edc - [5]
-	7fff5ebb5edd - [5]
-	7fff5ebb5ede - [5]
-	7fff5ebb5edf - [5]
-	7fff5ebb5ee8 - [6]
-	7fff5ebb5eea - [6]
-	7fff5ebb5eeb - [6]
-	7fff5ebb5eec - [6]
-	7fff5ebb5eed - [6]
-	7fff5ebb5eee - [6]
-	7fff5ebb5eef - [6]
-	7fff5ebb5ef0 - [6]
-	7fff5ebb5ef1 - [6]
-	7fff5ebb5ef2 - [6]
-	7fff5ebb5ef3 - [6]
-	7fff5ebb5ef5 - [7]
-	7fff5ebb5ef6 - [7]
-	7fff5ebb5ef7 - [7]
-	7fff5ebb5ef8 - [7]
-	7fff5ebb5efa - [7]
-	7fff5ebb5efb - [7]
-	7fff5ebb60c8 - [3]
-	7fff5ebb60c9 - [3]
-	7fff5ebb60ca - [3]
-	7fff5ebb60cb - [3]
-	7fff5ebb60cc - [3]
-	7fff5ebb60cd - [3]
-	7fff5ebb60ce - [3]
-	7fff5ebb60cf - [3]
-	7fff5ebb60d0 - [3]
-	7fff5ebb60d1 - [3]
-	7fff5ebb60d2 - [3]
-	7fff5ebb60d3 - [3]
-	7fff5ebb60d4 - [3]
-	7fff5ebb60d5 - [3]
-	7fff5ebb60d6 - [3]
-	7fff5ebb60d7 - [3]
-	7fff5ebb60d8 - [3]
-	7fff5ebb60d9 - [3]
-	7fff5ebb60da - [3]
-	7fff5ebb60db - [3]
+	7fe16ed2a005 - [4]
+	7fe16ed2a00c - [5]
+	7fe16ed2a00d - [5]
+	7fe16ed2a00e - [5]
+	7fe16ed2a01a - [6]
+	7fe16ed2a01b - [6]
+	7fe16ed2a01c - [6]
+	7fe16ed2a01d - [6]
+	7fe16ed2a01e - [6]
+	7fe16ed2a01f - [6]
+	7fe16ed2a020 - [6]
+	7fe16ed2a021 - [6]
+	7fe16ed2a029 - [7]
+	7fe185a96e50 - [2]
+	7fe185a96e51 - [2]
+	7fe185a96e52 - [2]
+	7fe185a96e53 - [2]
+	7fff32be6df0 - [4]
+	7fff32be6df1 - [4]
+	7fff32be6df2 - [4]
+	7fff32be6df3 - [4]
+	7fff32be6df5 - [4]
+	7fff32be6df6 - [4]
+	7fff32be6df8 - [5]
+	7fff32be6df9 - [5]
+	7fff32be6dfa - [5]
+	7fff32be6dfc - [5]
+	7fff32be6dfd - [5]
+	7fff32be6dfe - [5]
+	7fff32be6dff - [5]
+	7fff32be6e08 - [6]
+	7fff32be6e0a - [6]
+	7fff32be6e0b - [6]
+	7fff32be6e0c - [6]
+	7fff32be6e0d - [6]
+	7fff32be6e0e - [6]
+	7fff32be6e0f - [6]
+	7fff32be6e10 - [6]
+	7fff32be6e11 - [6]
+	7fff32be6e12 - [6]
+	7fff32be6e14 - [7]
+	7fff32be6e15 - [7]
+	7fff32be6e16 - [7]
+	7fff32be6e17 - [7]
+	7fff32be6e19 - [7]
+	7fff32be6e1a - [7]
+	7fff32be6fe8 - [3]
+	7fff32be6fe9 - [3]
+	7fff32be6fea - [3]
+	7fff32be6feb - [3]
+	7fff32be6fec - [3]
+	7fff32be6fed - [3]
+	7fff32be6fee - [3]
+	7fff32be6fef - [3]
+	7fff32be6ff0 - [3]
+	7fff32be6ff1 - [3]
+	7fff32be6ff2 - [3]
+	7fff32be6ff3 - [3]
+	7fff32be6ff4 - [3]
+	7fff32be6ff5 - [3]
+	7fff32be6ff6 - [3]
+	7fff32be6ff7 - [3]
+	7fff32be6ff8 - [3]
+	7fff32be6ff9 - [3]
+	7fff32be6ffa - [3]
+	7fff32be6ffb - [3]
