@@ -598,14 +598,22 @@ void SetTaintForMemory(ADDRINT start, ADDRINT size, int numOfArgs, ...)
   memlist *elementToAdd;
   for (map<size_t, memlist*>::iterator iter = tagMemoryMap.begin(); iter != tagMemoryMap.end(); iter++) {
     if (bitset_test_bit(tmp, iter->first)) {
+      int *addrFlag = (int*) calloc (size, sizeof(int));
+      int i;
       elementToAdd = iter->second;
-      while (true) {
-        if (!(elementToAdd->next)) {
-          break;
-        }  
+      while (elementToAdd->next) {
+	i = (int)(elementToAdd->memAddress - start);
+	if (i >= 0 && i < (int)size) {
+	  addrFlag[i] = 1;
+	}
         elementToAdd = elementToAdd->next;
       }
+      i = -1;
       for (ADDRINT addr = start; addr < start+size; addr++) {
+	i++;
+	if (addrFlag[i]) {
+	  continue;
+	}
         elementToAdd->memAddress =  addr; 
         elementToAdd->isCleared = 0;
         elementToAdd->next = new memlist;
@@ -1041,8 +1049,9 @@ void dump_taints(void)
         	memlist *address = iter->second;
 		taintAssignmentLog << "\t" << std::dec << iter->first << ": [";
 		//taintAssignmentLog << std::hex;
-		while (address->next) {
-			taintAssignmentLog << sep << std::hex << address->memAddress << "-" << std::dec << address->isCleared << "\n\t";
+		while (address->next) {			
+			char c = *((char*) address->memAddress);
+			taintAssignmentLog << sep << std::hex << address->memAddress << "-" << std::dec << address->isCleared << "-" << std::dec << c << "-" << static_cast<int>(c) << "\n\t";
 			sep = ", ";
 			address = address->next;
 		}
