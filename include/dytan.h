@@ -120,7 +120,7 @@ extern map<ADDRINT, bitset *>controlTaintMap;
  */
 extern map<size_t, memlist *> tagMemoryMap;
 
-extern map<string, rules *> rulesMap;
+extern map<string, rulesMap *> rulesImageMap;
 
 extern bool tagMemoryMap_isInitialized;
 

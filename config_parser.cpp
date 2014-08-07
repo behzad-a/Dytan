@@ -48,11 +48,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 void parseRulesFile()
 {
-    bool flag_APIname = true;
+    bool flag_imgName = true;
+    bool flag_APIname = false;
+    bool flag_overwrite = false;
     bool flag_sourceArg = false;
     bool flag_destArg = false;
     int count;
     string APIname;
+    string imgName;
     char buf[256];
     FILE *fp = NULL;
     fp = fopen("conf_rules.dat", "rt");
@@ -64,22 +67,43 @@ void parseRulesFile()
         fclose(fp);
 	char *token = strtok(buf, ",\n");
 	while (token) {
-	    if (flag_APIname) {
+	    if (flag_imgName) {
+		imgName = token;
+		printf("imgName: %s\n", imgName.c_str());
+		rulesImageMap[imgName] = new rulesMap;
+		flag_imgName = false;
+		flag_APIname = true;
+	    }
+	    else if (flag_APIname) {
 		APIname = token;
 		printf("APIname: %s\n", APIname.c_str());
-		rulesMap[APIname] = new rules;
+		(*(rulesImageMap[imgName]))[APIname] = new rules;
 		flag_APIname = false;
+		flag_overwrite = true;
+	    }
+	    else if (flag_overwrite) {
+		int read = atoi(token);
+		if (read) {
+		    printf("Overwrite enabled\n");
+		    ((*(rulesImageMap[imgName]))[APIname])->overwrite = true;
+		}
+		else{
+		    printf("asssigning the union ...\n");
+		    ((*(rulesImageMap[imgName]))[APIname])->overwrite = false;
+		}
+		flag_overwrite = false;
 		flag_sourceArg = true;
 	    }
             else if (flag_sourceArg) {
-		if (atoi(token) == -1) {
+		int read = atoi(token);
+		if (read == -1) {
 		    printf("-1 in sourceArg\n");
 		    flag_sourceArg = false;
 		    flag_destArg = true;
 		}
 		else {
-		    rulesMap[APIname]->srcArgs.push_back(atoi(token)); 
-		    printf("pushed back source arg: %d\n", atoi(token));
+		    ((*(rulesImageMap[imgName]))[APIname])->srcArgs.push_back(read); 
+		    printf("pushed back source arg: %d\n", read);
 		}
 	    }
 	    else if (flag_destArg) {
@@ -87,14 +111,10 @@ void parseRulesFile()
 		if (read == -1) {
 		    printf("-1 in destArg\n");
 		    flag_destArg = false;
-		    flag_APIname = true;
-		}
-		else if (read == 0) {
-		    rulesMap[APIname]->returnIndex = 1;
-		    printf("return value\n");
+		    flag_imgName = true;
 		}
 		else {
-		    rulesMap[APIname]->destArgs.push_back(read);
+		    ((*(rulesImageMap[imgName]))[APIname])->destArgs.push_back(read);
 		    printf("pushed back dest arg: %d\n", read);
 		}
 	    }

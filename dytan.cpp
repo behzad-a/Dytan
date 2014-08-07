@@ -56,7 +56,7 @@ map<REG, bitset *> regTaintMap;
 map<ADDRINT, bitset *> memTaintMap;
 map<ADDRINT, bitset *> controlTaintMap;
 map<size_t, memlist *> tagMemoryMap;
-map<string, rules *> rulesMap;
+map<string, rulesMap *> rulesImageMap;
 
 std::ofstream log;
 std::ofstream  taintAssignmentLog;
