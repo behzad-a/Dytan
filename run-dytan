@@ -10,4 +10,4 @@ fi
 
 PINHOME=~/code/pin-2.12-58423-gcc.4.4.7-linux
 DYTAN=~/code/dytan/obj-intel64
-$PINHOME/pin -t $DYTAN/dytan -- $PROG
+$PINHOME/pin -t $DYTAN/dytan -injection child -- $PROG

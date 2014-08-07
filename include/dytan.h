@@ -60,6 +60,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <sys/stat.h>
 #include "bitset.h"
 #include "tag_memset.h"
+#include "struct_dat.h"
 
 #include "taint_generator.h"
 
@@ -89,7 +90,7 @@ extern int NUMBER_OF_TAINT_MARKS;
 extern TaintGenerator *taintGen;
 
 /* controls if detailed logging is used */
-//#define TRACE 1
+#define TRACE 1
 
 /*
    controls if registers are considered to propagate taint if they're
@@ -118,6 +119,8 @@ extern map<ADDRINT, bitset *>controlTaintMap;
  * map that stores memory addresses for taint marks
  */
 extern map<size_t, memlist *> tagMemoryMap;
+
+extern map<string, rules *> rulesMap;
 
 extern bool tagMemoryMap_isInitialized;
 

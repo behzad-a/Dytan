@@ -47,8 +47,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 void UnimplementedInstruction(INS ins, void * v)
 {
-  log << INS_Disassemble(ins) << " unimplemented[" << INS_Disassemble(ins) << "]\n";
-    log.flush();
+  //log << INS_Disassemble(ins) << " unimplemented[" << INS_Disassemble(ins) << "]\n";
+    //log.flush();
 /*    fprintf(log, "%s unimplemented[%d]\n", INS_Disassemble(ins).c_str(),
 	  INS_Opcode(ins));*/
   //abort();
@@ -297,7 +297,11 @@ static void Instrument_ADD(INS ins, void *v)
 
   //eflags <- dest, src
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 2,
 		 IARG_PTR, dest,
 		 IARG_PTR, src,
@@ -465,7 +469,11 @@ static void Instrument_ADC(INS ins, void *v)
   // Insert calls that copy the taint marks associated with the
   // eflags into the global storage of eflags
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(TaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
 		 IARG_PTR, eflags,
 		 IARG_END);
 
@@ -501,7 +509,11 @@ static void Instrument_ADC(INS ins, void *v)
   // Insert call to propagate taint marks from dest, src, eflags to eflags
   //eflags <- dest, src, eflags
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 3,
 		 IARG_PTR, dest,
 		 IARG_PTR, src,
@@ -607,7 +619,11 @@ static void Instrument_XOR(INS ins, void *v)
   
   //eflags <- dest, src
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 2,
 		 IARG_PTR, dest,
 		 IARG_PTR, src,
@@ -668,7 +684,11 @@ static void Instrument_CMP(INS ins, void *v)
 
   //eflags <- dest, src
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 2,
 		 IARG_PTR, dest,
 		 IARG_PTR, src,
@@ -708,7 +728,11 @@ static void Instrument_DEC(INS ins, void *v)
   
   //eflags <- dest
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 1,
 		 IARG_PTR, dest,
 		 IARG_END);
@@ -842,7 +866,11 @@ static void Instrument_IMUL(INS ins, void *v)
 
     //eflags <- dest, src
     INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
-		   IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#if __WORDSIZE == 32
+		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
            IARG_UINT32, 2,
 		   IARG_PTR, dest,
 		   IARG_PTR, src,
@@ -886,7 +914,11 @@ static void Instrument_IMUL(INS ins, void *v)
 
     //eflags <- dest, src
     INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
-		   IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#if __WORDSIZE == 32
+		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
            IARG_UINT32, 2,
 		   IARG_PTR, dest,
 		   IARG_PTR, src,
@@ -948,7 +980,11 @@ static void Instrument_TEST(INS ins, void *v)
   
   //eflags <- dest, src
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 2,
 		 IARG_PTR, dest,
 		 IARG_PTR, src,
@@ -1300,7 +1336,11 @@ static void Instrument_PUSHFD(INS ins, void *v)
 {
   
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(TaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
 		 IARG_PTR, src,
 		 IARG_END);
   
@@ -1326,7 +1366,11 @@ static void Instrument_POPFD(INS ins, void *v)
   //eflags <- top of stack
 
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(TaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
 		 IARG_PTR, src,
 		 IARG_END);
 }
@@ -1425,7 +1469,11 @@ static void Instrument_CMPSB(INS ins, void *v)
 
   //eflags <- dest, src
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 2,
 		 IARG_PTR, dest,
 		 IARG_PTR, src,
@@ -1509,7 +1557,11 @@ static void Instrument_SCASB(INS ins, void *v)
 
   //eflags <- src, al
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 2,
 		 IARG_PTR, src,
 		 IARG_PTR, eax,
@@ -1560,14 +1612,22 @@ static void Instrument_CLD(INS ins, void *v)
 {
   //eflags <- clear
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(ClearTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
 		 IARG_END);
 }
 
 static void Instrument_STD(INS ins, void *v) 
 {
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(ClearTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
 		 IARG_END);
 }
 
@@ -1741,7 +1801,11 @@ static void Instrument_CMOVcc(INS ins, void *v)
 static void Instrument_SETcc(INS ins, void *v)
 {
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(TaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
 		 IARG_PTR, src,
 		 IARG_END);
 
@@ -1891,7 +1955,11 @@ static void Instrument_SHLD(INS ins, void *v)
 
   //eflags <- dest, src, count
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 3,
 		 IARG_PTR, dest,
 		 IARG_PTR, src,
@@ -2075,7 +2143,11 @@ static void Instrument_XADD(INS ins, void *v)
 
   //eflags <- dest, src
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 2,
 		 IARG_PTR, dest,
 		 IARG_PTR, src,
@@ -2317,7 +2389,11 @@ static void Instrument_NEG(INS ins, void *v)
   
   //eflags <- dest
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 1,
 		 IARG_PTR, dest,
 		 IARG_END);
@@ -2401,7 +2477,11 @@ static void Instrument_SAR(INS ins, void *v)
 
   //eflags <- dest, count
   INS_InsertCall(ins, IPOINT_BEFORE, AFUNPTR(SetTaintForRegister),
+#if __WORDSIZE == 32
 		 IARG_ADDRINT, LEVEL_BASE::REG_EFLAGS,
+#else
+		 IARG_ADDRINT, LEVEL_BASE::REG_RFLAGS,
+#endif
          IARG_UINT32, 2,
 		 IARG_PTR, dest,
 		 IARG_PTR, cnt,

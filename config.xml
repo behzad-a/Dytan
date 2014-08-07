@@ -1,14 +1,14 @@
 <dytan-config>
     <sources>
-        <source type="path">
-            <!-- <file>sample/wc/a.txt</file>
-            <file>sample/wc/b.txt</file>
-	    <file>conf</file>
-            <granularity>PerByte</granularity> -->
-            <file>conf</file>
+        <!--<source type="network">
+            <host>127.0.0.1</host>
+            <port>80</port>
+            <granularity>PerRead</granularity> -->
+	<source type="path">
+	    <file>/home/behzad/squid/etc/squid.conf</file>
             <granularity>PerOffset</granularity>
         </source>
-        <taint-marks>4096</taint-marks>
+        <taint-marks>32</taint-marks>
     </sources>
     <propagation>
         <dataflow>true</dataflow>

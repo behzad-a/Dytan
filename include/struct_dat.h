@@ -8,3 +8,14 @@ typedef struct _datFile {
 
 extern datfile datFile;
 #endif
+
+#include <deque>
+
+#ifndef struct_rules__
+#define struct_rules__
+typedef struct _rules {
+	int returnIndex;
+	std::deque<int> srcArgs;
+	std::deque<int> destArgs;
+} rules;
+#endif

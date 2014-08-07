@@ -1,5 +1,5 @@
 Pin 2.12 kit 58423
-E: Attach to pid 3968 failed. 
+E: Attach to pid 3223 failed. 
   The Operating System configuration prevents Pin from using the default (parent) injection mode.
   To resolve this, either execute the following (as root):
   $ echo 0 > /proc/sys/kernel/yama/ptrace_scope

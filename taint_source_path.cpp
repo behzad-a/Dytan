@@ -38,6 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "include/taint_source_path.h"
 #include "include/dytan.h"
+
 #include "include/struct_dat.h"
 
 #ifdef TARGET_WINDOWS
@@ -53,7 +54,7 @@ typedef struct _IO_STATUS_BLOCK {
 void pathSourceReadDefault(string, syscall_arguments, void *);
 void pathSourceReadCallbackPerByte(string, syscall_arguments, void *);
 void pathSourceReadCallbackPerRead(string, syscall_arguments, void *);
-void pathSourceReadCallbackPerOffset(string, syscall_arguments, void *);//added by Behzad
+void pathSourceReadCallbackPerOffset(string, syscall_arguments, void *);
 
 PathTaintSource::PathTaintSource(SyscallMonitor *syscallMonitor, bool observeEverything)
 {
@@ -76,10 +77,10 @@ void PathTaintSource::addObserverForAll(taint_range_t type)
             break;
         case PerRead:
             monitor->registerCallbackForAll(pathSourceReadCallbackPerRead, NULL);
-            break;
-	case PerOffset: 	//added by Behzad
-	    monitor->registerCallbackForAll(pathSourceReadCallbackPerOffset, NULL);
 	    break;
+        case PerOffset:         
+            monitor->registerCallbackForAll(pathSourceReadCallbackPerOffset, NULL);
+            break;
         default:
             printf("Missing case\n");
             abort();
@@ -95,9 +96,9 @@ void PathTaintSource::addPathSource(string pathname, taint_range_t type)
   }
   case PerRead: {
     monitor->observePath(pathname, pathSourceReadCallbackPerRead, NULL);
-    break;	
+    break;
   }
-  case PerOffset: {		//added by Behzad
+  case PerOffset: {             
     monitor->observePath(pathname, pathSourceReadCallbackPerOffset, NULL);
     break;
   }
@@ -155,6 +156,7 @@ void pathSourceReadCallbackPerByte(string pathname,
   off_t currentOffset = lseek(args.arg0, 0, SEEK_CUR);
   off_t curr = currentOffset - args.ret;
 #endif
+
   taintAssignmentLog << "Tainted from file " << pathname << "\n";
   for(ADDRINT addr = start; addr < end; addr++) {
       tag = taintGen->nextTaintMark();
@@ -228,32 +230,21 @@ void pathSourceReadDefault(string pathname,
 			   void *v)
 {
 }
+ 
 
-//************************************************************************
-// THIS ENTIRE FUNCTION WAS ADDED BY BEHZAD
 void pathSourceReadCallbackPerOffset(string pathname,
                                    syscall_arguments args,
                                    void *v)
 {
-  int count = -1;					//added by Behzad
-  int flag = 0; 					//added by Behzad
-  int index = 0;					//added by Behzad
+  static int count = -1;
+  int flag = 0;
+  int index = 0;
 //  TaintGenerator *gen = static_cast<TaintGenerator *>(v);
 #ifdef TARGET_WINDOWS
   char *buf = (char *) args.arg5;
   PIO_STATUS_BLOCK ib = (PIO_STATUS_BLOCK)args.arg4;
   int ret = (int)ib->Information;
-/*
-  log << "IO_STATUS_BLOCK:";
-  log << std::hex;
-  char *p = (char *)ib;
-  for (int i = 0; i < 16; i++) {
-          log << " ";
-          log << (int)p[i];
-  }
-  log << std::dec;
-  log << "\n";
-*/
+
 #else
   char *buf = (char *) args.arg1;
   int ret = args.ret;
@@ -277,21 +268,21 @@ void pathSourceReadCallbackPerOffset(string pathname,
   off_t currentOffset = lseek(args.arg0, 0, SEEK_CUR);
   off_t curr = currentOffset - args.ret;
 #endif
-  taintAssignmentLog << "Tainted from file " << pathname << "\n";
+taintAssignmentLog << "Tainted from file " << pathname << "\n";
 for(ADDRINT addr = start; addr < end; addr++) {
-      count++; 						// added by Behzad
-      if ((count < datFile.start[index]) || (count > datFile.end[index])) { //added      
-      	continue; //added
+      count++;
+      if ((count < datFile.start[index]) || (count > datFile.end[index])) {
+        continue;
       }
-      if (count == datFile.start[index]) //added  
-        flag = 1; //added
+      if (count == datFile.start[index])
+        flag = 1;
       if (count == datFile.end[index])
-	index++;
-      if (flag) { //added
+        index++;
+      if (flag) {
         tag = taintGen->nextTaintMark();
         flag = 0;
       }
-     
+
       bitset_set_bit(s, tag);
       memTaintMap[addr] = bitset_copy(s);
       bitset_reset(s);
@@ -310,4 +301,5 @@ for(ADDRINT addr = start; addr < end; addr++) {
       log.flush();
   }
 #endif
-} 
+}
+ 

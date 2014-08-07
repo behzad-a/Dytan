@@ -46,8 +46,68 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "include/dytan.h"
 #include "include/struct_dat.h"
 
+void parseRulesFile()
+{
+    bool flag_APIname = true;
+    bool flag_sourceArg = false;
+    bool flag_destArg = false;
+    int count;
+    string APIname;
+    char buf[256];
+    FILE *fp = NULL;
+    fp = fopen("conf_rules.dat", "rt");
+    if (fp) {
+	memset(buf, 0, sizeof(buf));
+	count = fread(buf, 1, sizeof(buf), fp);
+        if (!count)
+            printf("Error: Empty conf_rules.dat file\n");
+        fclose(fp);
+	char *token = strtok(buf, ",\n");
+	while (token) {
+	    if (flag_APIname) {
+		APIname = token;
+		printf("APIname: %s\n", APIname.c_str());
+		rulesMap[APIname] = new rules;
+		flag_APIname = false;
+		flag_sourceArg = true;
+	    }
+            else if (flag_sourceArg) {
+		if (atoi(token) == -1) {
+		    printf("-1 in sourceArg\n");
+		    flag_sourceArg = false;
+		    flag_destArg = true;
+		}
+		else {
+		    rulesMap[APIname]->srcArgs.push_back(atoi(token)); 
+		    printf("pushed back source arg: %d\n", atoi(token));
+		}
+	    }
+	    else if (flag_destArg) {
+		int read = atoi(token);
+		if (read == -1) {
+		    printf("-1 in destArg\n");
+		    flag_destArg = false;
+		    flag_APIname = true;
+		}
+		else if (read == 0) {
+		    rulesMap[APIname]->returnIndex = 1;
+		    printf("return value\n");
+		}
+		else {
+		    rulesMap[APIname]->destArgs.push_back(read);
+		    printf("pushed back dest arg: %d\n", read);
+		}
+	    }
+	    token = strtok(NULL, ",\n");
+	}
+    }
+    else {
+	printf("Error: Cannot open conf_rules.dat\n");
+    }
+}
+
 datfile datFile;
-// parseDatFiles() FUNCTION WAS ADDED BY BEHZAD
+
 void parseDatFiles()
 {
     char buf[256];
@@ -59,33 +119,34 @@ void parseDatFiles()
         memset(buf, 0, sizeof(buf));
         count = fread(buf, 1, sizeof(buf), fp);
         if (count == 0)
-	    printf("Error: empty conf_offset.dat file!\n");
-	fclose(fp);
-	char *token = strtok(buf, ",\n");
+            printf("Error: empty conf_offset.dat file!\n");
+        fclose(fp);
+        char *token = strtok(buf, ",\n");
         count = 0;
         while (token) {
-	    if (count % 3 == 0) {
-		// option name
-	    }
-	    if (count % 3 == 1) {
-		// start_offset
-		datFile.start[index] = atoi(token);
-		printf("word[%d]_start_offset = %d\n", index, datFile.start[index]);
-	    }
-	    if (count % 3 == 2) {
-		// end_offset
-		datFile.end[index] = atoi(token);
-		printf("word[%d]_end_offset = %d\n", index, datFile.end[index]);
-		index++;
-	    }
-	    token = strtok(NULL, ",\n");
-	    count ++;
-	}
-	datFile.index = index - 1;
-    } 
+            if (count % 3 == 0) {
+                // option name
+            }
+            if (count % 3 == 1) {
+                // start_offset
+                datFile.start[index] = atoi(token);
+                printf("word[%d]_start_offset = %d\n", index, datFile.start[index]);
+            }
+            if (count % 3 == 2) {
+                // end_offset
+                datFile.end[index] = atoi(token);
+                printf("word[%d]_end_offset = %d\n", index, datFile.end[index]);
+                index++;
+            }
+            token = strtok(NULL, ",\n");
+            count ++;
+        }
+        datFile.index = index - 1;
+    }
     else
-	printf("Error: cannot open conf_offset.dat file!\n");
+        printf("Error: cannot open conf_offset.dat file!\n");
 }
+
 
 /**
  * Parses "sources" child of the xml configuration
@@ -114,8 +175,8 @@ void parseSources(xmlDocPtr doc, xmlNodePtr cur, config *conf)
                         log.flush();
                         if(!xmlStrcmp(sub->name, (const xmlChar *)"granularity")) {
                             string granularity((char *)subtext);
-			    if (granularity == "PerOffset") 			//added
-				parseDatFiles(); 				//added
+			    if (granularity == "PerOffset")
+                                parseDatFiles();
                             src.granularity = granularity;
                         } else {
                             string details((char *)subtext);
@@ -224,6 +285,8 @@ void parseSinks(xmlDocPtr doc, xmlNodePtr cur, config *conf)
  *
  */
 int parseConfig( int argc, char **argv, config *conf ){
+
+    parseRulesFile();
 
     xmlDocPtr doc;
     xmlNodePtr cur, sub;

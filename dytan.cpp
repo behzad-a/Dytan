@@ -56,6 +56,7 @@ map<REG, bitset *> regTaintMap;
 map<ADDRINT, bitset *> memTaintMap;
 map<ADDRINT, bitset *> controlTaintMap;
 map<size_t, memlist *> tagMemoryMap;
+map<string, rules *> rulesMap;
 
 std::ofstream log;
 std::ofstream  taintAssignmentLog;
@@ -74,6 +75,8 @@ bitset *rflags;
 
 bool tracing;
 bool controlFlowTainting; 
+
+bool tagMemoryMap_isInitialized = false;
 
 int NUMBER_OF_TAINT_MARKS = 4096;
 TaintGenerator *taintGen;
@@ -321,6 +324,25 @@ void SetTaintForRegister(REG dest, int numOfArgs, ...)
      included and setting [A|B|C|D]X won't set the super or subregisters
   */
 
+  // r15d
+  if(LEVEL_BASE::REG_R15D == dest) {
+    //r15w
+    if(regTaintMap.end() != regTaintMap.find(LEVEL_BASE::REG_R15W)) {
+      bitset_set_bits(regTaintMap[LEVEL_BASE::REG_R15W], tmp);
+    }
+    else {
+      regTaintMap[LEVEL_BASE::REG_R15W] = bitset_copy(tmp);
+    }
+    
+    //r15b
+    if(regTaintMap.end() != regTaintMap.find(LEVEL_BASE::REG_R15B)) {
+      bitset_set_bits(regTaintMap[LEVEL_BASE::REG_R15B], tmp);
+    }
+    else {
+      regTaintMap[LEVEL_BASE::REG_R15B] = bitset_copy(tmp);
+    }
+  }
+
   //eax
   if(LEVEL_BASE::REG_EAX == dest) {
     //ax
@@ -453,7 +475,7 @@ void SetTaintForRegister(REG dest, int numOfArgs, ...)
 
     sep = "";
     for(int i = 0; i < (int)controlTaint->nbits; i++) {
-        if(bi*tset_test_bit(controlTaint, i)) {
+        if(bitset_test_bit(controlTaint, i)) {
             log << sep << i;
             sep = ", ";
         }
@@ -510,27 +532,7 @@ void ClearTaintForMemory(ADDRINT start, ADDRINT size)
           iter != controlTaintMap.end(); iter++) {
           bitset_union(controlTaint, iter->second);
       }
-
-
-  /*
-  printf ("Clear called!");
-  cout << "ClearTaintForMemory called!";
-  memlist *elementToClear;
-  for (map<size_t, memlist*>::iterator iter = tagMemoryMap.begin(); iter != tagMemoryMap.end(); iter++) {
-    if (!bitset_test_bit(controlTaint, iter->first)) {
-      elementToClear = iter->second;
-      while (elementToClear->next) {
-        if (((elementToClear->next)->memAddress >= start) && ((elementToClear->next)->memAddress < (start+size))) {
-          cout << "Memory address being cleared: " << std::hex << start << "\n";
-	  elementToClear->next = (elementToClear->next)->next;
-        }
-	elementToClear = elementToClear->next;
-      }
-    }
-  }
-  */
-
-  
+    
   for(ADDRINT addr = start; addr < start + size; addr++) {
     map<ADDRINT, bitset *>::iterator iter = memTaintMap.find(addr);
     if(memTaintMap.end() != iter) {
@@ -586,7 +588,7 @@ void SetTaintForMemory(ADDRINT start, ADDRINT size, int numOfArgs, ...)
         }
   
   bitset_union(tmp, controlTaint);
-
+    
   if (!tagMemoryMap_isInitialized) {
     tagMemoryMap_isInitialized = true;
     for (size_t counter=0; counter<(size_t)NUMBER_OF_TAINT_MARKS; counter++) {
@@ -602,19 +604,19 @@ void SetTaintForMemory(ADDRINT start, ADDRINT size, int numOfArgs, ...)
       int i;
       elementToAdd = iter->second;
       while (elementToAdd->next) {
-	i = (int)(elementToAdd->memAddress - start);
-	if (i >= 0 && i < (int)size) {
-	  addrFlag[i] = 1;
-	}
+        i = (int)(elementToAdd->memAddress - start);
+        if (i >= 0 && i < (int)size) {
+          addrFlag[i] = 1;
+        }
         elementToAdd = elementToAdd->next;
       }
       i = -1;
       for (ADDRINT addr = start; addr < start+size; addr++) {
-	i++;
-	if (addrFlag[i]) {
-	  continue;
-	}
-        elementToAdd->memAddress =  addr; 
+        i++;
+        if (addrFlag[i]) {
+          continue;
+        }
+        elementToAdd->memAddress =  addr;
         elementToAdd->isCleared = 0;
         elementToAdd->next = new memlist;
         elementToAdd = elementToAdd->next;
@@ -627,27 +629,26 @@ void SetTaintForMemory(ADDRINT start, ADDRINT size, int numOfArgs, ...)
       memlist *element;
       while (elementToAdd->next) {
         if ((elementToAdd->memAddress >=start) && (elementToAdd->memAddress < start+size) && (!elementToAdd->isCleared)) {
-	  flag = elementToAdd->isCleared;
+          flag = elementToAdd->isCleared;
           element = elementToAdd;
           while (element->next) {
-	    element = element->next;
-	    if ((element->next) && (element->memAddress == elementToAdd->memAddress)){
-	      flag = element->isCleared;
-	    }
-	  }
-	  if (!flag) {
+            element = element->next;
+            if ((element->next) && (element->memAddress == elementToAdd->memAddress)){
+              flag = element->isCleared;
+            }
+          }
+          if (!flag) {
             element->memAddress = elementToAdd->memAddress;
-	    element->isCleared = 1;
+            element->isCleared = 1;
             element->next = new memlist;
             (element->next)->next = NULL;
-	  }
+          }
         }
         elementToAdd = elementToAdd->next;
       }
     }
   }
 
-    
 
   for(ADDRINT addr = start; addr < start + size; addr++) {
     if(memTaintMap.end() != memTaintMap.find(addr)) {
@@ -696,14 +697,22 @@ void PushControl(ADDRINT addr)
   }
 #endif
 
+#if __WORDSIZE == 32
   if(regTaintMap.end() == regTaintMap.find(LEVEL_BASE::REG_EFLAGS) ||
      bitset_is_empty(regTaintMap[LEVEL_BASE::REG_EFLAGS])) return;
+#else
+  if(regTaintMap.end() == regTaintMap.find(LEVEL_BASE::REG_RFLAGS) ||
+     bitset_is_empty(regTaintMap[LEVEL_BASE::REG_RFLAGS])) return;
+#endif
 
     if(controlTaintMap.end() == controlTaintMap.find(addr)) {
         controlTaintMap[addr] = bitset_init(NUMBER_OF_TAINT_MARKS);
     }
+#if __WORDSIZE == 32
     bitset_union(controlTaintMap[addr], regTaintMap[LEVEL_BASE::REG_EFLAGS]);
-
+#else
+    bitset_union(controlTaintMap[addr], regTaintMap[LEVEL_BASE::REG_RFLAGS]);
+#endif
     
   //dump control taint map
 #ifdef TRACE
@@ -803,12 +812,11 @@ static void Controlflow(RTN rtn, void *v)
   RTN_Open(rtn);
 
   RoutineGraph *rtnGraph = new RoutineGraph(rtn);
-
   map<ADDRINT, set<ADDRINT> > controls;
   std::ofstream log2;
-  log2.open("debug2.log");
+  log2.open("debug2.log", std::ofstream::out | std::ofstream::app);
   for(INS ins = RTN_InsHead(rtn); INS_Valid(ins); ins = INS_Next(ins)) {
-	log2 << "\nINS_Address: "<< INS_Address(ins);
+	log2 << "\nINS_Address: "<< std::hex << INS_Address(ins) << std::dec;
     if(XED_CATEGORY_COND_BR == INS_Category(ins)) {
 	  
       ADDRINT addr = INS_Address(ins);
@@ -816,6 +824,7 @@ static void Controlflow(RTN rtn, void *v)
       if(NULL == block) {
 	printf("block is null\n");
 	fflush(stdout);
+	continue;
       }
 
       BasicBlock *ipdomBlock = block->getPostDominator();
@@ -862,7 +871,6 @@ static void Controlflow(RTN rtn, void *v)
 		   IARG_END);
     IARGLIST_Free(args);
   }
-  
   delete rtnGraph;
 
   RTN_Close(rtn);
@@ -972,10 +980,9 @@ int set_framework_options(config *conf, SyscallMonitor *monitor)
             taint_granularity = PerRead;
         } else if (!src.granularity.compare("PerByte")) {
             taint_granularity = PerByte;
-        } else if (!src.granularity.compare("PerOffset")) {	//added by Behzad
-	    taint_granularity = PerOffset;			//added by Behzad
+        } else if (!src.granularity.compare("PerOffset")) {
+            taint_granularity = PerOffset;
         }
-	
 		
         if (!conf->num_markings.compare("1")) {
             taintGen = new ConstantTaintGenerator(5);
@@ -1041,24 +1048,48 @@ void cleanup(void)
 
 void dump_taints(void)
 {
-
-	taintAssignmentLog << "\nMapping from tags to memory addresses:\n";
+	taintAssignmentLog << " \ndeleted memory addresses excluded ...\n";
     for(map<size_t, memlist *>::iterator iter = tagMemoryMap.begin(); iter != tagMemoryMap.end(); iter++) {
-    	if (iter->second->next) {		
-		string sep = "";
-        	memlist *address = iter->second;
-		taintAssignmentLog << "\t" << std::dec << iter->first << ": [";
-		//taintAssignmentLog << std::hex;
-		while (address->next) {			
-			char c = *((char*) address->memAddress);
-			taintAssignmentLog << sep << std::hex << address->memAddress << "-" << std::dec << address->isCleared << "-" << std::dec << c << "-" << static_cast<int>(c) << "\n\t";
-			sep = ", ";
-			address = address->next;
-		}
-		taintAssignmentLog << "]\n";
+       memlist *preCurrentElement = iter->second;
+       while (preCurrentElement->next) {
+                int flag = 0;
+                if (preCurrentElement->isCleared == 0) {
+                        memlist *currentElement = preCurrentElement->next;
+                        memlist *elementToDelete = preCurrentElement;
+                        while (elementToDelete->next) {
+                                memlist *preElementToDelete = elementToDelete;
+                                elementToDelete = elementToDelete->next;
+                                if ((elementToDelete->memAddress == currentElement->memAddress) && (elementToDelete->isCleared)) {
+                                        preCurrentElement->next = currentElement->next;
+                                        preElementToDelete->next = elementToDelete->next;
+                                        flag = 1;
+                                        break;
+                                }
+                        }
+               }
+               if (!flag)
+                       preCurrentElement = preCurrentElement->next;
+       }
+    }
+
+        taintAssignmentLog << "\nMapping from tags to memory addresses:\n";
+    for(map<size_t, memlist *>::iterator iter = tagMemoryMap.begin(); iter != tagMemoryMap.end(); iter++) {
+        if (iter->second->next) {
+                string sep = "";
+                memlist *address = iter->second;
+                taintAssignmentLog << "\t" << std::dec << iter->first << ": [";
+                //taintAssignmentLog << std::hex;
+                while (address->next) {
+                        char c = *((char*) address->memAddress);
+                        taintAssignmentLog << sep << std::hex << address->memAddress << "-" << std::dec << address->isCleared << "-" << std::dec << c << "-" << static_cast<int>(c) << "\n\t";
+                        sep = ", ";
+                        address = address->next;
+                }
+                taintAssignmentLog << "]\n";
         }
     }
     taintAssignmentLog << "\n\n";
+
 
 
 	taintAssignmentLog << "All tainted memory addresses:\n";

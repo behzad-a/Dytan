@@ -1,0 +1,24 @@
+<dytan-config>
+    <sources>
+        <source type="network">
+            <host>127.0.0.1</host>
+            <port>80</port>
+            <granularity>PerRead</granularity>
+        </source>
+        <taint-marks>32</taint-marks>
+    </sources>
+    <propagation>
+        <dataflow>true</dataflow>
+        <controlflow>false</controlflow>
+    </propagation>
+    <sinks>
+        <sink>
+            <id>36</id>
+            <location type="instruction">
+                <instruction>ret</instruction>
+                <instruction>jmp</instruction>
+            </location>
+            <action>validate-absence</action>
+        </sink>
+    </sinks>
+</dytan-config>
